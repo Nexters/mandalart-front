@@ -1,17 +1,13 @@
 import React, { Component, Fragment } from 'react';
-
-import { MandalArtRenderer } from '../components';
 import { HeaderContainer } from '../containers';
 
-class MandalArtEditor extends Component {
+export default class MandalArtGrave extends Component {
   render() {
     return (
       <Fragment>
         <HeaderContainer />
-        <MandalArtRenderer />
+        <div>만다라트 무덤</div>
       </Fragment>
     );
   }
 }
-
-export default MandalArtEditor;
