@@ -1,8 +1,9 @@
-export const mandalArtFragment = (ctx, x, y, length, text) => {
-  ctx.fillRect(x, y, length, length);
+const mandalArtFragment = (ctx, x, y, length, color = '#FFFFFF', text) => {
+  ctx.fillStyle = color;
+  ctx.strokeRect(x, y, length, length);
 };
 
-export const drawMandalGroup = (ctx, x, y, length) => {
+const drawMandalGroup = (ctx, x, y, length) => {
   let startX = x - length / 2 - length;
   let startY = y - length / 2 - length;
   for (let j = 0; j < 3; j += 1) {

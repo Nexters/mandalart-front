@@ -4,6 +4,10 @@ import ApolloClient from "apollo-boost";
 const client = new ApolloClient({
   // server url
   uri: "",
+  // 로컬 스테이트 저장
+  clientState: {
+    
+  }
 });
 
 export default client;
