@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 
 import { HeaderContainer } from '../containers';
@@ -6,7 +6,7 @@ import { HeaderContainer } from '../containers';
 class MandalArtList extends Component {
   render() {
     return (
-      <div>
+      <Fragment>
         <HeaderContainer />
         만다라트 목록입니다
         <div>
@@ -14,7 +14,7 @@ class MandalArtList extends Component {
             <button text="만달아트 만들러 가기" />
           </Link>
         </div>
-      </div>
+      </Fragment>
     );
   }
 }
