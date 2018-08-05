@@ -1,39 +1,25 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+
+import { userPic } from '../../static/images';
+import './Header.scss';
 
 export default class Header extends Component {
   render() {
     return (
-      <header
-        style={{
-          width: '100%',
-          height: '7%',
-          backgroundColor: '#e5e5e5',
-        }}
-      >
-        <div
-          style={{
-            width: '80%',
-            height: '100%',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            margin: '0 auto',
-          }}
-        >
-          <section>MandalArt</section>
-          <section>
-            <Link to="/mandal-arts" style={{ textDecoration: 'none' }}>
-              나의 만다라트
-            </Link>
-            <Link to="/mandal-arts/graves" style={{ textDecoration: 'none' }}>
-              만다라트 무덤
-            </Link>
+      <header className="header-wrapper">
+        <div className="header-container">
+          <section className="header-logo">
+            MandalArt
+            <section className="header-menu">
+              <Link to="/mandal-arts">나의 만다라트</Link>
+              <Link to="/mandal-arts/graves">만다라트 무덤</Link>
+            </section>
           </section>
-          <section>
-            <div style={{ display: 'inline-block' }}>User Pic</div>
+          <section className="header-user">
+            <img src={userPic} alt="userPic" />
             <span>User Name</span>
-            <button>Logout Btn</button>
+            <button>Logout</button>
           </section>
         </div>
       </header>

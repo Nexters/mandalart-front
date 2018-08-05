@@ -14,7 +14,7 @@ import './App.scss';
 class App extends Component {
   render() {
     return (
-      <div style={{ height: '100vh' }}>
+      <div className="container">
         <Route exact path="/" component={LandingPage} />
         <Switch>
           <Route exact path="/mandal-arts" component={MandalArtList} />

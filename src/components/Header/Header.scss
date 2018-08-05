@@ -1,0 +1,55 @@
+@import '../../styles/index.scss';
+
+.header-wrapper {
+  width: 100%;
+  height: 8%;
+  background-color: $bg-grey;
+  .header-container {
+    width: $inner-width;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    .header-logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: inline-block;
+      .header-menu {
+        margin-left: 3rem;
+        display: inline-block;
+        font-size: 1rem;
+        a {
+          color: $text-grey;
+          font-weight: 600;
+          text-decoration: none;
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+  .header-user {
+    display: flex;
+    align-items: center;
+    height: 2rem;
+    img {
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-right: 1rem;
+    }
+    span {
+      position: relative;
+      top: 2px;
+      margin-right: 1rem;
+      color: $text-grey;
+      font-weight: bold;
+    }
+    button {
+      font-weight: lighter;
+      color: $text-grey;
+      background: transparent;
+      border-radius: 20px;
+      padding: 5px 10px;
+    }
+  }
+}
