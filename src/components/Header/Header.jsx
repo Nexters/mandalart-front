@@ -7,7 +7,7 @@ export default class Header extends Component {
       <header
         style={{
           width: '100%',
-          height: '8%',
+          height: '7%',
           backgroundColor: '#e5e5e5',
         }}
       >

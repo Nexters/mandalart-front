@@ -15,6 +15,7 @@ class MandalArtRenderer extends Component {
   }
 
   componentDidMount() {
+    this.checkWidowSize();
     window.addEventListener('resize', this.checkWidowSize);
     this.renderer = setInterval(this.canvasFrameEvent, 1000 / 30);
   }
@@ -27,7 +28,7 @@ class MandalArtRenderer extends Component {
   checkWidowSize = () => {
     this.setState({
       wWidth: window.innerWidth,
-      wHeight: window.innerHeight,
+      wHeight: window.innerHeight * 0.93,
     });
   };
 
@@ -36,7 +37,7 @@ class MandalArtRenderer extends Component {
     const { wWidth, wHeight } = this.state;
     ctx.clearRect(0, 0, wWidth, wHeight);
 
-    // sjq
+    // 화면에 맞춰서 랜더하기 위함
     const lengthOffset = wWidth > 850 ? 850 : (wWidth * 10) / 12;
     // 만다라트 업데이트 로직
 

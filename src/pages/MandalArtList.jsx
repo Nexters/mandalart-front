@@ -10,8 +10,8 @@ class MandalArtList extends Component {
         <HeaderContainer />
         만다라트 목록입니다
         <div>
-          <Link to="/mandal-art/new">
-            <button text="만달아트 만들러 가기" />
+          <Link to="/mandal-arts/new">
+            <button value="만달아트 만들러 가기" />
           </Link>
         </div>
       </Fragment>
