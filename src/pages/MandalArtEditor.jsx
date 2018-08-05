@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
-import { MandalArtRenderer } from '../components';
-import { HeaderContainer } from '../containers';
+import { HeaderContainer, MandalArtRenderContainer } from '../containers';
 
 class MandalArtEditor extends Component {
   state = {
@@ -11,7 +10,7 @@ class MandalArtEditor extends Component {
     return (
       <Fragment>
         <HeaderContainer />
-        <MandalArtRenderer />
+        <MandalArtRenderContainer />
       </Fragment>
     );
   }
