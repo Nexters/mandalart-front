@@ -1,3 +1,4 @@
 import HeaderContainer from './HeaderContainer';
+import GraveListsContainer from './GraveListsContainer';
 
-export { HeaderContainer };
+export { HeaderContainer, GraveListsContainer };
