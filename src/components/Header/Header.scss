@@ -1,0 +1,21 @@
+.header-wrapper {
+  width: 100%;
+  height: 8%;
+  background-color: #e5e5e5;
+  .header-container {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    a {
+      text-decoration: none;
+    }
+  }
+  .header-user {
+    div {
+      display: inline-block;
+    }
+  }
+}
