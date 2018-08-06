@@ -10,6 +10,20 @@ export default class GraveListsContainer extends Component {
         end_date: '2018-08-01',
         title: '코딩 초고수 되기',
         achRate: 50,
+        isRead: true,
+      },
+      {
+        start_date: '2018-05-10',
+        end_date: '2018-08-01',
+        title: '코딩 초고수 되기',
+        achRate: 50,
+        isRead: false,
+      },
+      {
+        start_date: '2018-05-10',
+        end_date: '2018-08-01',
+        title: '코딩 초고수 되기',
+        achRate: 50,
         isRead: false,
       },
       {
@@ -41,6 +55,20 @@ export default class GraveListsContainer extends Component {
         title: '코딩 초고수 되기',
         achRate: 50,
         isRead: false,
+      },
+      {
+        start_date: '2018-05-10',
+        end_date: '2018-08-01',
+        title: '코딩 초고수 되기',
+        achRate: 50,
+        isRead: false,
+      },
+      {
+        start_date: '2018-05-10',
+        end_date: '2018-08-01',
+        title: '코딩 초고수 되기',
+        achRate: 50,
+        isRead: true,
       },
       {
         start_date: '2018-05-10',

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import './GraveLists.scss';
 
 export default class GraveLists extends Component {
@@ -6,7 +7,7 @@ export default class GraveLists extends Component {
     const { heavenLists } = this.props;
     if (heavenLists.length)
       return heavenLists.map((el, i) => (
-        <li className="lists" key={i}>
+        <li className={classNames({ heavenIsRead: el.isRead })} key={i}>
           <p className="date">
             {el.start_date}~{el.end_date}
           </p>
@@ -20,7 +21,7 @@ export default class GraveLists extends Component {
     const { hellLists } = this.props;
     if (hellLists.length)
       return hellLists.map((el, i) => (
-        <li className="lists" key={i}>
+        <li className={classNames({ hellIsRead: el.isRead })} key={i}>
           <p className="date">
             {el.start_date}~{el.end_date}
           </p>
@@ -38,10 +39,12 @@ export default class GraveLists extends Component {
         <section className="grave-lists">
           <ul className="heaven">
             <h2>천국 만다라트</h2>
+            <br />
             {this.renderHeavenLists()}
           </ul>
           <ul className="hell">
             <h2>지옥 만다라트</h2>
+            <br />
             {this.renderHellLists()}
           </ul>
         </section>
