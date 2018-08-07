@@ -1,5 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import { HeaderContainer, GraveListsContainer } from '../containers';
+import {
+  HeaderContainer,
+  GraveListsContainer,
+  GraveDetailContainer,
+} from '../containers';
 
 export default class MandalArtGrave extends Component {
   render() {
@@ -7,6 +11,7 @@ export default class MandalArtGrave extends Component {
       <Fragment>
         <HeaderContainer />
         <GraveListsContainer />
+        <GraveDetailContainer />
       </Fragment>
     );
   }
