@@ -6,6 +6,7 @@ import './Header.scss';
 
 export default class Header extends Component {
   render() {
+    const { onClickLogOutBtn } = this.props;
     return (
       <header className="header-wrapper">
         <div className="header-container">
@@ -19,7 +20,7 @@ export default class Header extends Component {
           <section className="header-user">
             <img src={userPic} alt="userPic" />
             <span>User Name</span>
-            <button>Logout</button>
+            <button onClick={onClickLogOutBtn}>Logout</button>
           </section>
         </div>
       </header>
