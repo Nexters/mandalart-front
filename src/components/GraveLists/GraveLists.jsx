@@ -14,11 +14,31 @@ export default class GraveLists extends Component {
           data-place="heaven"
           onClick={onClickGrave}
         >
-          <p className="date">
+          <p
+            className="date"
+            data-index={i}
+            data-place="heaven"
+            onClick={onClickGrave}
+          >
             {el.start_date}~{el.end_date}
           </p>
-          <p className="title">{el.title}</p>
-          <p className="rate">{el.achRate}%</p>
+          <p
+            className="title"
+            data-index={i}
+            data-place="heaven"
+            onClick={onClickGrave}
+          >
+            {' '}
+            {el.title}
+          </p>
+          <p
+            className="rate"
+            data-index={i}
+            data-place="heaven"
+            onClick={onClickGrave}
+          >
+            {el.achRate}%
+          </p>
         </li>
       ));
   };
@@ -34,11 +54,30 @@ export default class GraveLists extends Component {
           data-place="hell"
           onClick={onClickGrave}
         >
-          <p className="date">
+          <p
+            className="date"
+            data-index={i}
+            data-place="hell"
+            onClick={onClickGrave}
+          >
             {el.start_date}~{el.end_date}
           </p>
-          <p className="title">{el.title}</p>
-          <p className="rate">{el.achRate}%</p>
+          <p
+            className="title"
+            data-index={i}
+            data-place="hell"
+            onClick={onClickGrave}
+          >
+            {el.title}
+          </p>
+          <p
+            className="rate"
+            data-index={i}
+            data-place="hell"
+            onClick={onClickGrave}
+          >
+            {el.achRate}%
+          </p>
         </li>
       ));
   };
@@ -46,8 +85,10 @@ export default class GraveLists extends Component {
     return (
       <div className="grave-container">
         <h1 className="grave-title">
-          만다라트 무덤<button>모두 읽은 상태로 표시</button>
+          만다라트 무덤
+          <button>모두 읽은 상태로 표시</button>
         </h1>
+
         <section className="grave-lists">
           <ul className="heaven">
             <h2>천국 만다라트</h2>
