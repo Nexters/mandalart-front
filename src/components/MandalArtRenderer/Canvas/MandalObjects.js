@@ -4,8 +4,10 @@ import roundRect from './RoundRect';
 // 한 칸랜더
 const mandalArtFragment = (ctx, x, y, length, data, mousePos) => {
   const { color, text } = data;
+  // console.log(text, x, y, mousePos, length);
   ctx.strokeStyle = 'transparent';
   if (isMouseInside(x, y, length, mousePos[0], mousePos[1])) {
+    console.log(1);
     ctx.fillStyle = '#FFFFFF';
     roundRect(ctx, x, y, (length * 19) / 20, (length * 19) / 20, 5, true);
   }

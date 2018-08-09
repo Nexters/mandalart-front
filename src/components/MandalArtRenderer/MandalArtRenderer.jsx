@@ -22,13 +22,13 @@ class MandalArtRenderer extends Component {
   // 리액트 랜더를 막고, 캔버스 랜더를 돌림
   shouldComponentUpdate(nextProps, nextState) {
     if (!(isEqual(nextProps, this.props) && isEqual(nextState, this.state))) {
-      this.canvasFrameEvent();
+      this.canvasFrameEvent(nextProps, nextState);
     }
     return false;
   }
 
   componentDidMount() {
-    this.checkWidowSize();
+    this.checkWidowSize(this.props, this.state);
     window.addEventListener('resize', this.checkWidowSize);
   }
 
@@ -59,9 +59,10 @@ class MandalArtRenderer extends Component {
     3. 커서...?
     4. 살려줘....
   */
-  canvasFrameEvent = () => {
+  canvasFrameEvent = (nextProps, nextState) => {
     const ctx = this.canvas.current.getContext('2d');
-    const { wWidth, wHeight } = this.state;
+    const { data } = nextProps;
+    const { wWidth, wHeight, mouseX, mouseY } = nextState;
     let x = wWidth / 2;
     let y = wHeight / 2;
 
@@ -70,19 +71,16 @@ class MandalArtRenderer extends Component {
 
     // 전체 확대용 만다라트 로직
     ctx.clearRect(0, 0, wWidth, wHeight);
-    drawMandalArt(ctx, x, y, lengthOffset / 9, this.props.data, [
-      this.state.mouseX,
-      this.state.mouseY,
-    ]);
+    drawMandalArt(ctx, x, y, lengthOffset / 9, data, [mouseX, mouseY]);
     // 만다라트 업데이트 로직
   };
 
   render() {
     const { wWidth, wHeight } = this.state;
-    const { handleMouseMove } = this;
+    const { handleMouseClick } = this;
     return (
       <canvas
-        onMouseDown={handleMouseMove}
+        onClick={handleMouseClick}
         style={{ position: 'fixed' }}
         ref={this.canvas}
         width={wWidth}
