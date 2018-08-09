@@ -1,9 +1,12 @@
 @import '../../styles/index.scss';
 
 .header-wrapper {
+  position: fixed;
+  top: 0;
   width: 100%;
-  height: 8%;
+  height: 64px;
   background-color: $bg-grey;
+  z-index: 100;
   .header-container {
     width: $inner-width;
     height: 100%;

@@ -1,0 +1,80 @@
+.grave-detail {
+  width: 460px;
+  height: 460px;
+  &.hell {
+    color: indianred;
+    button {
+      color: indianred;
+    }
+    .guide {
+      div {
+        background-color: indianred;
+      }
+    }
+  }
+  &.heaven {
+    color: skyblue;
+    button {
+      color: skyblue;
+    }
+    .guide {
+      div {
+        background-color: skyblue;
+      }
+    }
+  }
+  .close {
+    border: 0;
+    font-size: 1.2rem;
+    position: relative;
+    left: 27rem;
+    bottom: 2.5rem;
+  }
+  .top {
+    display: flex;
+    justify-content: space-between;
+    .date {
+      font-weight: lighter;
+      font-size: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .title {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    .guide {
+      span {
+        position: relative;
+        bottom: 4px;
+      }
+      div {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        &.uncomplete {
+          opacity: 0.6;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+  .middle {
+    margin: 2rem 0;
+    div {
+      width: 200px;
+      height: 250px;
+      display: inline-block;
+    }
+  }
+  .bottom {
+    font-size: 1.5rem;
+    p {
+      margin-bottom: 15px;
+    }
+    span {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+}

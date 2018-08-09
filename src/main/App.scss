@@ -131,3 +131,10 @@ table {
 .container {
   height: 100vh;
 }
+
+.page-container {
+  position: relative;
+  width: 100%;
+  top: 60px;
+  height: calc(100%-60px);
+}

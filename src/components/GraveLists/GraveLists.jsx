@@ -4,10 +4,16 @@ import './GraveLists.scss';
 
 export default class GraveLists extends Component {
   renderHeavenLists = () => {
-    const { heavenLists } = this.props;
+    const { heavenLists, onClickGrave } = this.props;
     if (heavenLists.length)
       return heavenLists.map((el, i) => (
-        <li className={classNames({ heavenIsRead: el.isRead })} key={i}>
+        <li
+          className={classNames({ heavenIsRead: el.isRead })}
+          key={i}
+          data-index={i}
+          data-place="heaven"
+          onClick={onClickGrave}
+        >
           <p className="date">
             {el.start_date}~{el.end_date}
           </p>
@@ -18,10 +24,16 @@ export default class GraveLists extends Component {
   };
 
   renderHellLists = () => {
-    const { hellLists } = this.props;
+    const { hellLists, onClickGrave } = this.props;
     if (hellLists.length)
       return hellLists.map((el, i) => (
-        <li className={classNames({ hellIsRead: el.isRead })} key={i}>
+        <li
+          className={classNames({ hellIsRead: el.isRead })}
+          key={i}
+          data-index={i}
+          data-place="hell"
+          onClick={onClickGrave}
+        >
           <p className="date">
             {el.start_date}~{el.end_date}
           </p>
