@@ -1,25 +1,26 @@
+@import '../../styles/index.scss';
+
 .grave-detail {
   width: 460px;
   height: 460px;
+  color: $text-grey;
   &.hell {
-    color: indianred;
     button {
-      color: indianred;
+      color: $hell-primary;
     }
     .guide {
       div {
-        background-color: indianred;
+        background-color: $hell-primary;
       }
     }
   }
   &.heaven {
-    color: skyblue;
     button {
-      color: skyblue;
+      color: $heaven-primary;
     }
     .guide {
       div {
-        background-color: skyblue;
+        background-color: $heaven-primary;
       }
     }
   }
@@ -75,6 +76,7 @@
     span {
       font-weight: bold;
       text-decoration: underline;
+      color: $text-grey-deep;
     }
   }
 }
