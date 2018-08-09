@@ -80,7 +80,7 @@ class MandalArtRenderer extends Component {
     const { handleMouseClick } = this;
     return (
       <canvas
-        onClick={handleMouseClick}
+        onMouseMove={handleMouseClick}
         style={{ position: 'fixed' }}
         ref={this.canvas}
         width={wWidth}

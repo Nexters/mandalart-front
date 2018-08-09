@@ -23,7 +23,12 @@ export default class MandalArtRenderContainer extends Component {
     const { mandalArtData } = this.state;
     return (
       <div
-        style={{ backgroundColor: '#1883FF', width: '100%', height: '100%' }}
+        style={{
+          backgroundColor: '#1883FF',
+          width: '100%',
+          height: '100%',
+          position: 'fixed',
+        }}
       >
         <MandalArtRenderer data={mandalArtData} />
       </div>

@@ -34,8 +34,12 @@ export const getMandalArtFragmentCenter = (row, column, x, y, length) => {
 };
 
 export const isMouseInside = (x, y, length, mouseX, mouseY) => {
-  if (x + length > mouseX && x < mouseX && y + length > mouseY && y < mouseY) {
-    console.log([x, y], length, [mouseX, mouseY]);
+  if (
+    x + length > mouseX &&
+    x < mouseX &&
+    y + (length * 3) / 2 > mouseY &&
+    y + length / 2 < mouseY
+  ) {
     return true;
   }
   return false;
