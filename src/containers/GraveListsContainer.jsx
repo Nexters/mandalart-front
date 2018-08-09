@@ -97,7 +97,12 @@ export default class GraveListsContainer extends Component {
     ],
   };
 
+  noScroll = () => {
+    window.scrollTo(0, 0);
+  };
+
   onClickGrave = e => {
+    window.addEventListener('scroll', this.noScroll);
     const { index, place } = e.target.dataset;
     this.setState({
       isGraveDetailOpen: true,
@@ -107,6 +112,7 @@ export default class GraveListsContainer extends Component {
   };
 
   onClickGraveClose = () => {
+    window.removeEventListener('scroll', this.noScroll);
     this.setState({
       isGraveDetailOpen: false,
       graveIndex: null,
