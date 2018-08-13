@@ -4,6 +4,11 @@ import './RewardSetting.js';
 export default class RewardSetting extends Component {
   state = {};
   render() {
-    return <div />;
+    return (
+      <div className="reward">
+        <h2>보상 설정</h2>
+        <div className="box" />
+      </div>
+    );
   }
 }

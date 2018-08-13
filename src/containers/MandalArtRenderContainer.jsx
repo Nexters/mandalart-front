@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MandalArtRenderer } from '../components';
+import { MandalArtRenderer, RewardSetting } from '../components';
 
 export default class MandalArtRenderContainer extends Component {
   state = {
@@ -18,9 +18,14 @@ export default class MandalArtRenderContainer extends Component {
         })),
       })),
     },
+    isRewardSetting: false,
   };
   render() {
-    const { mandalArtData } = this.state;
-    return <MandalArtRenderer data={mandalArtData} />;
+    const { mandalArtData, isRewardSetting } = this.state;
+    return isRewardSetting ? (
+      <RewardSetting />
+    ) : (
+      <MandalArtRenderer data={mandalArtData} />
+    );
   }
 }
