@@ -5,7 +5,7 @@ export default class MandalArtGrave extends Component {
   render() {
     return (
       <Fragment>
-        <HeaderContainer />
+        <HeaderContainer gravePage />
         <div className="page-container">
           <GraveListsContainer />
         </div>

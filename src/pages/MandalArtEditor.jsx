@@ -9,7 +9,7 @@ class MandalArtEditor extends Component {
   render() {
     return (
       <Fragment>
-        <HeaderContainer />
+        <HeaderContainer mandalPage />
         <div className="page-container">
           <MandalArtRenderContainer />
         </div>

@@ -7,7 +7,7 @@ class MandalArtList extends Component {
   render() {
     return (
       <Fragment>
-        <HeaderContainer />
+        <HeaderContainer mandalPage />
         <div className="page-container">
           만다라트 목록입니다
           <div>
