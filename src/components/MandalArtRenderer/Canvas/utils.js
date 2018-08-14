@@ -1,9 +1,11 @@
+// 중앙 기준으로 나뉘는 값을 계산
 export const logicDivByCenter = (counter, centerValue, left, center, right) => {
   if (counter < centerValue) {
     return left;
   }
   return counter === centerValue ? center : right;
 };
+
 // 랜더 카운터에 맞춰서 현재 랜더할 만다라트 데이터를 뽑음
 export const getCurrentMandalArt = (mandalArtData, counter) => {
   return logicDivByCenter(
@@ -15,6 +17,7 @@ export const getCurrentMandalArt = (mandalArtData, counter) => {
   );
 };
 
+// 만다라트 프래그먼트의 중간값을 계산
 export const getMandalArtFragmentCenter = (row, column, x, y, length) => {
   const returnX = logicDivByCenter(
     column,
@@ -33,12 +36,13 @@ export const getMandalArtFragmentCenter = (row, column, x, y, length) => {
   return { x: returnX, y: returnY };
 };
 
-export const isMouseInside = (x, y, length, mouseX, mouseY) => {
+// 마우스가 만다라트 안에 있나 체크
+export const isPointInsideMandal = (x, y, length, mouseX, mouseY) => {
   if (
-    x + length > mouseX &&
-    x < mouseX &&
-    y + (length * 3) / 2 > mouseY &&
-    y + length / 2 < mouseY
+    x + length / 2 > mouseX &&
+    x - length / 2 < mouseX &&
+    y + length / 2 > mouseY &&
+    y - length / 2 < mouseY
   ) {
     return true;
   }
