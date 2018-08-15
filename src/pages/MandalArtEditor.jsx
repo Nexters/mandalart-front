@@ -8,14 +8,10 @@ class MandalArtEditor extends Component {
   };
   render() {
     return (
-      <Fragment>
+      <div className="background">
         <MandalArtRenderContainer />
         <HeaderContainer mandalPage />
-        <div className="page-container">
-          <div style={{ width: '100%', height: 60 }}>header</div>
-          hasdfadslfkj
-        </div>
-      </Fragment>
+      </div>
     );
   }
 }
