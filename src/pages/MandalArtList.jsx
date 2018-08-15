@@ -11,7 +11,7 @@ class MandalArtList extends Component {
         <HeaderContainer />
         <div className="page-container">
           <div>
-            정연이의 만다라트 목록
+            {sessionStorage.getItem('name')}의 만다라트 목록
           </div>
           <MandalArtListContainer />
           <div>

@@ -31,6 +31,7 @@ const Landing = fullpageProps => (<ReactFullpage
                     return (
                         <div 
                             className="section" 
+                            key={landing}
                             style={{
                                 backgroundImage: `url(${landing})`,
                                 backgroundPosition: 'center'
