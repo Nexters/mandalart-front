@@ -8,7 +8,7 @@ class MandalArtList extends Component {
   render() {
     return (
       <Fragment>
-        <HeaderContainer />
+        <HeaderContainer mandalPage />
         <div className="page-container">
           <div>
             {sessionStorage.getItem('name')}의 만다라트 목록
