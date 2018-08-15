@@ -37,6 +37,7 @@
     "postcss-loader": "2.0.8",
     "promise": "8.0.1",
     "raf": "3.4.0",
+    "rc-progress": "^2.2.5",
     "react": "^16.4.1",
     "react-apollo": "^2.1.9",
     "react-dev-utils": "^5.0.1",

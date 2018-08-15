@@ -1,3 +1,5 @@
+@import '../styles/index.scss';
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -130,11 +132,13 @@ table {
 
 .container {
   height: 100vh;
+  background: url('../static/images/background.jpeg') no-repeat;
 }
 
 .page-container {
   position: relative;
-  width: 100%;
-  top: 60px;
-  height: calc(100%-60px);
+  width: $inner-width;
+  margin: 0 auto;
+  top: 64px;
+  height: calc(100vh - 64px);
 }

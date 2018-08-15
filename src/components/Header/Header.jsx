@@ -8,7 +8,6 @@ import './Header.scss';
 export default class Header extends Component {
   render() {
     const { onClickLogOutBtn, mandalPage, gravePage } = this.props;
-    console.log(mandalPage, gravePage);
     return (
       <header className="header-wrapper">
         <div className="header-container">
