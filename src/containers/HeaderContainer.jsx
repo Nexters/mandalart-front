@@ -15,10 +15,13 @@ export default class HeaderContainer extends Component {
   };
   render() {
     const { redirectToLogin } = this.state;
+    const { mandalPage, gravePage } = this.props;
     return redirectToLogin ? (
       <Redirect to="/" />
     ) : (
       <Header
+        mandalPage={mandalPage}
+        gravePage={gravePage}
         redirectToLogin={redirectToLogin}
         onClickLogOutBtn={this.onClickLogOutBtn}
       />

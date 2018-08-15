@@ -1,5 +1,9 @@
-import React, { Component } from 'react';
-import { MandalArtRenderer } from '../components';
+import React, { Component, Fragment } from 'react';
+import {
+  MandalArtRenderer,
+  RewardSetting,
+  MandalArtEditorHeader,
+} from '../components';
 
 export default class MandalArtRenderContainer extends Component {
   state = {
@@ -21,23 +25,30 @@ export default class MandalArtRenderContainer extends Component {
         })),
       })),
     },
+    isRewardSetting: false,
   };
 
   selectMandal = () => {};
 
   render() {
-    const { mandalArtData } = this.state;
+    const { mandalArtData, isRewardSetting } = this.state;
     return (
-      <div
-        style={{
-          backgroundColor: '#1883FF',
-          width: '100%',
-          height: '100%',
-          position: 'fixed',
-        }}
-      >
-        <MandalArtRenderer data={mandalArtData} />
-      </div>
+      <Fragment>
+        <MandalArtEditorHeader />
+        {isRewardSetting ? (
+          <RewardSetting />
+        ) : (
+          <div
+            style={{
+              width: '100%',
+              height: '100%',
+              position: 'fixed',
+            }}
+          >
+            <MandalArtRenderer data={mandalArtData} />
+          </div>
+        )}
+      </Fragment>
     );
   }
 }
