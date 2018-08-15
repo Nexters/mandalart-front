@@ -49,14 +49,17 @@ export default class RewardSetting extends Component {
           <div className="bar">
             <div className="purpose-wrapper">
               <div style={{ left: '0%' }}>
+                <span>0%</span>
                 <p>당일치기 여행을 아주 그냥 제대로</p>
                 <div />
               </div>
               <div style={{ left: '10%' }}>
+                <span>10%</span>
                 <p>당일치기 여행을 아주로</p>
                 <div />
               </div>
               <div style={{ left: '100%' }}>
+                <span>100%</span>
                 <p>당일치기 여행을 아주 그냥 제대로</p>
                 <div />
               </div>

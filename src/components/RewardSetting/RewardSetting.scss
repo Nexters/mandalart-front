@@ -79,6 +79,11 @@
         left: -10px;
         & > div {
           position: absolute;
+          & > span {
+            position: relative;
+            bottom: 210px;
+            right: 20px;
+          }
           & > p {
             position: relative;
             bottom: 175px;
