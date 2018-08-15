@@ -1,6 +1,6 @@
 import React from 'react';
 
-class AddMandalArtForm extends React.Component {
+class MandalArtAddForm extends React.Component {
     render() {
         return(
             <div>
@@ -28,9 +28,9 @@ class AddMandalArtForm extends React.Component {
                 <button>
                     OK
                 </button>
-            </div>>
+            </div>
         )
     }
 }
 
-export default AddMandalArtForm;
+export default MandalArtAddForm;
