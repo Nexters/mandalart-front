@@ -1,10 +1,9 @@
 import roundRect from './RoundRect';
-import { isPointInsideMandal } from './utils';
+import { isPointInsideMandal, translatedMousePosition } from './utils';
 
-const HOVER_MAX_LEVEL = 1.1;
+const HOVER_MAX_LEVEL = 1.08;
 
 class MandalArtFragment {
-  isZooming = false;
   // hover Zoom
   hoverLevel = 1;
 
@@ -12,7 +11,7 @@ class MandalArtFragment {
     if (isHover) {
       this.hoverLevel =
         this.hoverLevel < HOVER_MAX_LEVEL
-          ? this.hoverLevel + 0.02
+          ? this.hoverLevel + 0.01
           : HOVER_MAX_LEVEL;
       return length * this.hoverLevel;
     }

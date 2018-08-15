@@ -48,3 +48,25 @@ export const isPointInsideMandal = (x, y, length, mouseX, mouseY) => {
   }
   return false;
 };
+
+export const calPointedArea = (point, length, center) => {
+  let coord = 0;
+  if (center - length * 4.5 < point && center - length * 1.5 > point) {
+    coord = -1;
+  } else if (center + length * 4.5 > point && center + length * 1.5 < point) {
+    coord = 1;
+  }
+  return coord;
+};
+
+export const translatedMousePosition = (
+  x,
+  y,
+  zoomLevel,
+  translateX,
+  translateY,
+) => {
+  const transX = zoomLevel === 1 ? x : Math.floor(x / zoomLevel);
+  const transY = zoomLevel === 1 ? y : Math.floor(y / zoomLevel);
+  return { x: transX, y: transY };
+};

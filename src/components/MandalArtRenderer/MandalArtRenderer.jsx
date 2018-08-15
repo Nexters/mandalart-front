@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { drawMandalArt, MandalArtFragment } from './Canvas';
+import throttle from 'lodash/throttle';
+import { drawMandalArt, MandalArtFragment, utils } from './Canvas';
 
 const HEIGHT_OFFSET = 64;
 
@@ -11,14 +12,21 @@ class MandalArtRenderer extends Component {
     [...new Array(9)].map(() => new MandalArtFragment()),
   );
 
+  x = 0;
+  y = 0;
+  lengthOffset = 0;
+
   // render variables
   state = {
     wWidth: window.innerWidth,
     wHeight: window.innerHeight,
     zoomStatus: {
       isZoomed: false,
-      isZoomFinished: false,
-      target: { x: 0, y: 0 },
+      zoomLevel: 1,
+      selectedArea: {
+        xCoord: 0,
+        yCoord: 0,
+      },
     },
     mouseX: 0,
     mouseY: 0,
@@ -43,14 +51,41 @@ class MandalArtRenderer extends Component {
   }
 
   handleMouseHover = e => {
+    const {
+      zoomStatus: { zoomLevel, selectedArea },
+    } = this.state;
+    const translateValue = this.lengthOffset * 4.5 * Math.sqrt(2);
+    const { x, y } = utils.translatedMousePosition(
+      e.clientX,
+      e.clientY,
+      zoomLevel,
+      selectedArea.xCoord * translateValue,
+      selectedArea.yCoord * translateValue,
+    );
     this.setState({
-      mouseX: e.clientX,
-      mouseY: e.clientY,
+      mouseX: x,
+      mouseY: y,
     });
   };
 
-  handleMouseClick = (x, y, length) => e => {
-    console.log(e.clientX, e.clientY);
+  // 마우스가 클릭한 구역을 리턴
+  handleMouseClick = () => {
+    const { x, y, lengthOffset: length } = this;
+    const { mouseX, mouseY, zoomStatus } = this.state;
+    const xCoord = utils.calPointedArea(mouseX, length, x);
+    const yCoord = utils.calPointedArea(mouseY, length, y);
+    if (!zoomStatus.isZoomed) {
+      this.setState({
+        zoomStatus: {
+          isZoomed: true,
+          zoomLevel: 2,
+          selectedArea: {
+            xCoord,
+            yCoord,
+          },
+        },
+      });
+    }
   };
 
   checkWidowSize = () => {
@@ -74,34 +109,33 @@ class MandalArtRenderer extends Component {
       const { data } = this.props;
       const { wWidth, wHeight, mouseX, mouseY } = this.state;
       const ctx = this.canvas.current.getContext('2d');
-      const x = wWidth / 2;
-      const y = (wHeight + HEIGHT_OFFSET) / 2;
+      this.x = wWidth / 2;
+      this.y = (wHeight + HEIGHT_OFFSET) / 2;
 
       // 화면에 맞춰서 랜더하기 위함
-      const lengthOffset = wWidth > 850 ? 850 : (wWidth * 10) / 12;
+      this.lengthOffset = (wWidth > 850 ? 850 : (wWidth * 10) / 12) / 9;
 
       // 전체 확대용 만다라트 로직
       ctx.clearRect(0, 0, wWidth, wHeight);
       drawMandalArt(
         ctx,
-        x,
-        y,
-        lengthOffset / 9,
+        this.x,
+        this.y,
+        this.lengthOffset,
         data,
         [mouseX, mouseY],
         mandalFragArray,
       );
-      // 만다라트 업데이트 로직
     }
   };
 
   render() {
     const { wWidth, wHeight } = this.state;
-    const { handleMouseHover } = this;
+    const { handleMouseHover, handleMouseClick } = this;
     return (
       <canvas
+        onClick={handleMouseClick}
         onMouseMove={handleMouseHover}
-        style={{ position: 'fixed' }}
         ref={this.canvas}
         width={wWidth}
         height={wHeight}
