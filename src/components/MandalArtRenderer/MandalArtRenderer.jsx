@@ -53,9 +53,13 @@ class MandalArtRenderer extends Component {
     const {
       zoomStatus: { zoomCorrect, selectedArea },
     } = this;
-    const translateValue = this.lengthOffset * 2.66 * Math.sqrt(2);
-    this.mouseX = (this.x - clientX) / (this.lengthOffset * 4.5 * zoomCorrect);
-    this.mouseY = (this.y - clientY) / (this.lengthOffset * 4.5 * zoomCorrect);
+    const translateValue = this.lengthOffset * 9 * Math.sqrt(2);
+    this.mouseX =
+      (this.x - clientX - translateValue * selectedArea.xCoord) /
+      (this.lengthOffset * 4.5 * zoomCorrect);
+    this.mouseY =
+      (this.y - clientY - translateValue * selectedArea.yCoord) /
+      (this.lengthOffset * 4.5 * zoomCorrect);
     console.log(this.mouseX, this.mouseY);
   };
 
@@ -120,10 +124,10 @@ class MandalArtRenderer extends Component {
   zoomCanvas = ctx => {
     const { x, y, lengthOffset } = this;
     if (this.zoomStatus.isZoomed) {
-      if (this.zoomStatus.zoomLevel < 1.18) {
+      if (this.zoomStatus.zoomLevel < 1.17) {
         this.zoomStatus.zoomLevel += 0.01;
         this.zoomStatus.zoomCorrect *= this.zoomStatus.zoomLevel;
-        const transValue = lengthOffset * 2.66 * Math.sqrt(2);
+        const transValue = lengthOffset * 2.65 * Math.sqrt(2);
         const transX = x + transValue * this.zoomStatus.selectedArea.xCoord;
         const transY = y + transValue * this.zoomStatus.selectedArea.yCoord;
         ctx.save();
