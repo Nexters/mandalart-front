@@ -30,11 +30,16 @@ export default class MandalArtRenderContainer extends Component {
 
   selectMandal = () => {};
 
+  onClickToRewardPage = () => {
+    this.setState({ isRewardSetting: true });
+  };
+
   render() {
     const { mandalArtData, isRewardSetting } = this.state;
     return (
       <Fragment>
-        <MandalArtEditorHeader />
+        <MandalArtEditorHeader isRewardSetting={isRewardSetting} />
+        <button onClick={this.onClickToRewardPage}>보상설정</button>
         {isRewardSetting ? (
           <RewardSetting />
         ) : (
