@@ -58,20 +58,20 @@ class LandingPart1 extends React.Component {
                 <div
                     className="landing-title"
                 >
-                    MANDALRART
+                    MANDALART
                 </div>
                 <FacebookLogin
                     cssClass="fb-btn"                
                     appId="250416945587793"
                     autoLoad={ false }
                     fields="name,email,picture"
-                    textButton="Facebook으로 로그인"
+                    textButton="facebook"
                     callback={ this.responseFacebook }
                 />            
                 <GoogleLogin
                     className="google-btn"
                     clientId="663679853206-4ubs89rk2135cu8n2mcqd0291h81ka2r.apps.googleusercontent.com"
-                    buttonText="Google로 로그인"
+                    buttonText="google"
                     onSuccess={this.responseGoogle}
                     onFailure={this.responseGoogle}
                 />                
