@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import throttle from 'lodash/throttle';
 import { drawMandalArt, MandalArtFragment, utils } from './Canvas';
 
 const HEIGHT_OFFSET = 64;
@@ -17,20 +16,19 @@ class MandalArtRenderer extends Component {
   lengthOffset = 0;
 
   // render variables
-  state = {
-    wWidth: window.innerWidth,
-    wHeight: window.innerHeight,
-    zoomStatus: {
-      isZoomed: false,
-      zoomLevel: 1,
-      selectedArea: {
-        xCoord: 0,
-        yCoord: 0,
-      },
+  wWidth = window.innerWidth;
+  wHeight = window.innerHeight;
+  zoomStatus = {
+    isZoomed: false,
+    zoomLevel: 1,
+    zoomCorrect: 1,
+    selectedArea: {
+      xCoord: 0,
+      yCoord: 0,
     },
-    mouseX: 0,
-    mouseY: 0,
   };
+  mouseX = 0;
+  mouseY = 0;
 
   // 온전히 캔버스로 동작하기 위함
   // 리액트 랜더를 막고, 캔버스 랜더를 돌림
@@ -39,7 +37,7 @@ class MandalArtRenderer extends Component {
   }
 
   componentDidMount() {
-    this.checkWidowSize(this.props, this.state);
+    this.checkWidowSize();
     window.addEventListener('resize', this.checkWidowSize);
     this.mounted = true;
     this.canvasFrameEvent();
@@ -51,48 +49,37 @@ class MandalArtRenderer extends Component {
   }
 
   handleMouseHover = e => {
+    const { clientX, clientY } = e;
     const {
-      zoomStatus: { zoomLevel, selectedArea },
-    } = this.state;
-    const translateValue = this.lengthOffset * 4.5 * Math.sqrt(2);
-    const { x, y } = utils.translatedMousePosition(
-      e.clientX,
-      e.clientY,
-      zoomLevel,
-      selectedArea.xCoord * translateValue,
-      selectedArea.yCoord * translateValue,
-    );
-    this.setState({
-      mouseX: x,
-      mouseY: y,
-    });
+      zoomStatus: { zoomCorrect, selectedArea },
+    } = this;
+    const translateValue = this.lengthOffset * 2.66 * Math.sqrt(2);
+    this.mouseX = (this.x - clientX) / (this.lengthOffset * 4.5 * zoomCorrect);
+    this.mouseY = (this.y - clientY) / (this.lengthOffset * 4.5 * zoomCorrect);
+    console.log(this.mouseX, this.mouseY);
   };
 
   // 마우스가 클릭한 구역을 리턴
   handleMouseClick = () => {
-    const { x, y, lengthOffset: length } = this;
-    const { mouseX, mouseY, zoomStatus } = this.state;
+    const { x, y, lengthOffset: length, mouseX, mouseY } = this;
     const xCoord = utils.calPointedArea(mouseX, length, x);
     const yCoord = utils.calPointedArea(mouseY, length, y);
-    if (!zoomStatus.isZoomed) {
-      this.setState({
-        zoomStatus: {
-          isZoomed: true,
-          zoomLevel: 2,
-          selectedArea: {
-            xCoord,
-            yCoord,
-          },
+    if (!this.zoomStatus.isZoomed) {
+      this.zoomStatus = {
+        isZoomed: true,
+        zoomLevel: 1,
+        zoomCorrect: 1,
+        selectedArea: {
+          xCoord,
+          yCoord,
         },
-      });
+      };
     }
   };
 
   checkWidowSize = () => {
-    this.setState({
-      wWidth: window.innerWidth,
-      wHeight: window.innerHeight,
-    });
+    this.wWidth = window.innerWidth;
+    this.wHeight = window.innerHeight;
   };
 
   /*
@@ -107,13 +94,13 @@ class MandalArtRenderer extends Component {
       requestAnimationFrame(this.canvasFrameEvent);
       const { mandalFragArray } = this;
       const { data } = this.props;
-      const { wWidth, wHeight, mouseX, mouseY } = this.state;
+      const { wWidth, wHeight, mouseX, mouseY } = this;
       const ctx = this.canvas.current.getContext('2d');
       this.x = wWidth / 2;
       this.y = (wHeight + HEIGHT_OFFSET) / 2;
 
       // 화면에 맞춰서 랜더하기 위함
-      this.lengthOffset = (wWidth > 850 ? 850 : (wWidth * 10) / 12) / 9;
+      this.lengthOffset = (wWidth > 550 ? 550 : (wWidth * 10) / 12) / 9;
 
       // 전체 확대용 만다라트 로직
       ctx.clearRect(0, 0, wWidth, wHeight);
@@ -126,11 +113,44 @@ class MandalArtRenderer extends Component {
         [mouseX, mouseY],
         mandalFragArray,
       );
+      this.zoomCanvas(ctx);
     }
   };
 
+  zoomCanvas = ctx => {
+    const { x, y, lengthOffset } = this;
+    if (this.zoomStatus.isZoomed) {
+      if (this.zoomStatus.zoomLevel < 1.18) {
+        this.zoomStatus.zoomLevel += 0.01;
+        this.zoomStatus.zoomCorrect *= this.zoomStatus.zoomLevel;
+        const transValue = lengthOffset * 2.66 * Math.sqrt(2);
+        const transX = x + transValue * this.zoomStatus.selectedArea.xCoord;
+        const transY = y + transValue * this.zoomStatus.selectedArea.yCoord;
+        ctx.save();
+        ctx.translate(transX, transY);
+        ctx.scale(this.zoomStatus.zoomLevel, this.zoomStatus.zoomLevel);
+        ctx.translate(-transX, -transY);
+      }
+    } else {
+      this.resetCanvas(ctx);
+    }
+  };
+
+  resetCanvas = ctx => {
+    ctx.restore();
+    this.zoomStatus = {
+      isZoomed: false,
+      zoomLevel: 1,
+      zoomCorrect: 1,
+      selectedArea: {
+        xCoord: 0,
+        yCoord: 0,
+      },
+    };
+  };
+
   render() {
-    const { wWidth, wHeight } = this.state;
+    const { wWidth, wHeight } = this;
     const { handleMouseHover, handleMouseClick } = this;
     return (
       <canvas

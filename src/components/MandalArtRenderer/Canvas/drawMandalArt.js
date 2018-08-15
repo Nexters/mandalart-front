@@ -1,7 +1,17 @@
 import { getCurrentMandalArt } from './utils';
 
 // 3x3랜더
-const drawMandalGroup = (ctx, x, y, length, data, mousePos, mandalFragment) => {
+const drawMandalGroup = (
+  ctx,
+  x,
+  y,
+  length,
+  data,
+  mousePos,
+  mandalFragment,
+  centerX,
+  centerY,
+) => {
   let startX = x - length;
   let startY = y - length;
   let drawCounter = 0;
@@ -16,6 +26,8 @@ const drawMandalGroup = (ctx, x, y, length, data, mousePos, mandalFragment) => {
         length,
         drawData,
         mousePos,
+        centerX,
+        centerY,
       );
       startX += length;
       drawCounter += 1;
@@ -42,6 +54,8 @@ const drawMandalArt = (ctx, x, y, length, data, mousePos, mandalFragArray) => {
         drawData,
         mousePos,
         mandalFragArray[drawCounter],
+        x,
+        y,
       );
       startX += length * 3;
       drawCounter += 1;

@@ -37,36 +37,35 @@ export const getMandalArtFragmentCenter = (row, column, x, y, length) => {
 };
 
 // 마우스가 만다라트 안에 있나 체크
-export const isPointInsideMandal = (x, y, length, mouseX, mouseY) => {
+export const isPointInsideMandal = (
+  x,
+  y,
+  length,
+  mouseX,
+  mouseY,
+  centerX,
+  centerY,
+) => {
+  const xPos = (centerX - x) / (length * 4.5);
+  const yPos = (centerY - y) / (length * 4.5);
+  const width = 1 / 9;
   if (
-    x + length / 2 > mouseX &&
-    x - length / 2 < mouseX &&
-    y + length / 2 > mouseY &&
-    y - length / 2 < mouseY
+    xPos + width > mouseX &&
+    xPos - width < mouseX &&
+    yPos + width > mouseY &&
+    yPos - width < mouseY
   ) {
     return true;
   }
   return false;
 };
 
-export const calPointedArea = (point, length, center) => {
+export const calPointedArea = point => {
   let coord = 0;
-  if (center - length * 4.5 < point && center - length * 1.5 > point) {
+  if (1 > point && 1 / 3 < point) {
     coord = -1;
-  } else if (center + length * 4.5 > point && center + length * 1.5 < point) {
+  } else if (-(1 / 3) > point && -1 < point) {
     coord = 1;
   }
   return coord;
-};
-
-export const translatedMousePosition = (
-  x,
-  y,
-  zoomLevel,
-  translateX,
-  translateY,
-) => {
-  const transX = zoomLevel === 1 ? x : Math.floor(x / zoomLevel);
-  const transY = zoomLevel === 1 ? y : Math.floor(y / zoomLevel);
-  return { x: transX, y: transY };
 };

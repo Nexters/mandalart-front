@@ -1,5 +1,5 @@
 import roundRect from './RoundRect';
-import { isPointInsideMandal, translatedMousePosition } from './utils';
+import { isPointInsideMandal } from './utils';
 
 const HOVER_MAX_LEVEL = 1.08;
 
@@ -33,9 +33,17 @@ class MandalArtFragment {
     ctx.fillText(text, x, y);
   }
 
-  draw(ctx, x, y, length, data, mousePos) {
+  draw(ctx, x, y, length, data, mousePos, centerX, centerY) {
     const drawLength = this._setHover(
-      isPointInsideMandal(x, y, length, mousePos[0], mousePos[1]),
+      isPointInsideMandal(
+        x,
+        y,
+        length,
+        mousePos[0],
+        mousePos[1],
+        centerX,
+        centerY,
+      ),
       length,
     );
     this._drawRect(ctx, x, y, drawLength, data);

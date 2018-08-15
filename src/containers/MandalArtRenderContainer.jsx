@@ -4,14 +4,17 @@ import { MandalArtRenderer } from '../components';
 export default class MandalArtRenderContainer extends Component {
   state = {
     mandalArtData: {
+      id: 3,
       text: 'this is goal',
       color: '#73B4FF',
       selected: false,
       objective: [...new Array(8)].map((_, index) => ({
+        id: `mainObject${index}`,
         text: `mainObject${index}`,
         color: '#4198FF',
         selected: false,
         objective: [...new Array(8)].map((_, indexSub) => ({
+          id: `subObject${indexSub}`,
           text: `subObject${indexSub}`,
           color: '#5CA7FF',
           selected: false,
@@ -19,6 +22,9 @@ export default class MandalArtRenderContainer extends Component {
       })),
     },
   };
+
+  selectMandal = () => {};
+
   render() {
     const { mandalArtData } = this.state;
     return (
