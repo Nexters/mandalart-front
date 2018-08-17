@@ -8,7 +8,7 @@ import {
   MandalArtGrave,
   MandalArtRewardTest,
 } from '../../pages';
-import { EditAccount, Settings, SocialLogin } from '../../components';
+import { EditAccount, Settings } from '../../components';
 
 import './AppPresenter.scss';
 
@@ -21,7 +21,6 @@ const AppPresenter = ({ isLoggedIn }) => (
 const LoggedOutRoutes = () => (
   <Switch>
     <Route path={'/'} exact={true} component={LandingPage} />
-    <Route path={'/social-login'} component={SocialLogin} />
     <Redirect from={'*'} to={'/'} />
   </Switch>
 );

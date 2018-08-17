@@ -1,34 +1,35 @@
 .section {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .landing-title {
-    font-size: 3rem;
-    color: white;
-    text-align: center;
+  font-size: 3rem;
+  color: white;
+  text-align: center;
 }
 
 .fb-btn {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    background: #88beff;
-    color: #167BF2;
-    border: 0px;
-    width: 224px;
-    height: 60px;
-    border-radius: 30px;
+  display: block;
+  margin: 30px auto;
+  margin-right: auto;
+  background: #88beff;
+  color: #167bf2;
+  font-size: 15px;
+  border: 0px;
+  width: 224px;
+  height: 60px;
+  border-radius: 30px;
 }
 
 .google-btn {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    background: #88beff;
-    color: #167BF2;
-    border: 0px;
-    width: 224px;
-    height: 60px;
-    border-radius: 30px;
+  display: block;
+  margin: auto;
+  background: #88beff;
+  color: #167bf2;
+  border: 0px;
+  font-size: 15px;
+  width: 224px;
+  height: 60px;
+  border-radius: 30px;
 }
