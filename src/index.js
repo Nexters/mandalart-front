@@ -6,6 +6,7 @@ import { ApolloProvider } from 'react-apollo';
 
 import client from './apolloConfig';
 import App from './components/App';
+import './global-styles';
 
 ReactModal.setAppElement('#root');
 

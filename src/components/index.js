@@ -1,5 +1,8 @@
 import MandalArtRenderer from './MandalArtRenderer';
 import Header from './Header/Header';
+import SocialLogin from './SocialLogin';
+import Settings from './Settings';
+import EditAccount from './EditAccount';
 import GraveLists from './GraveLists/GraveLists';
 import GraveDetail from './GraveDetail/GraveDetail';
 import RewardSetting from './RewardSetting/RewardSetting';
@@ -12,4 +15,7 @@ export {
   GraveDetail,
   RewardSetting,
   MandalArtEditorHeader,
+  SocialLogin,
+  Settings,
+  EditAccount,
 };
