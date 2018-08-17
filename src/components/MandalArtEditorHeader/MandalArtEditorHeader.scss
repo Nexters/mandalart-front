@@ -1,0 +1,29 @@
+@import '../../styles/index.scss';
+
+.editor-header {
+  position: relative;
+  top: 64px;
+  height: 100px;
+  width: $inner-width;
+  margin: 0 auto;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & > span {
+    font-size: 30px;
+    color: #fff;
+    font-weight: bold;
+  }
+  & > div {
+    & > span {
+      font-weight: bold;
+      font-size: 21px;
+      color: #52a2ff;
+      background: #1477ec;
+      padding: 0.6rem;
+      border-radius: 15px;
+      margin-left: 10px;
+    }
+  }
+}
