@@ -6,6 +6,7 @@ class MandalArtEditor extends Component {
   state = {
     // 나중에...
   };
+
   render() {
     return (
       <div className="background">

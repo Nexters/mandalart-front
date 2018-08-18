@@ -101,7 +101,7 @@ class MandalArtRenderer extends Component {
     );
     this.lengthOffset = this.init;
     this.x = this.wWidth / 2;
-    this.y = this.wHeight / 2;
+    this.y = this.wHeight / 2 - 100;
   };
 
   /*
