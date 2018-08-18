@@ -2,13 +2,13 @@ import reset from 'styled-reset';
 import { injectGlobal } from './styled-components';
 
 injectGlobal`
-  @import url('https://fonts.googleapis.com/css?family=Maven+Pro');
+  @import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
   ${reset};
   * {
       box-sizing: border-box;
   }
   body{
-      font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+      font-family: 'NanumSquare', sans-serif;
   }
   a{
       color:inherit;
