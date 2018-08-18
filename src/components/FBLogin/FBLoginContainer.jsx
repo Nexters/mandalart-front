@@ -17,8 +17,6 @@ class FBLoginContainer extends React.Component {
     lastName: '',
   };
 
-  facebookMutation;
-
   render() {
     return (
       <Mutation mutation={LOG_USER_IN}>
@@ -49,16 +47,17 @@ class FBLoginContainer extends React.Component {
   }
 
   loginCallback = response => {
+    console.log('fufufufufkck', response);
     const { name, first_name, last_name, email, id, accessToken } = response;
 
     if (accessToken) {
       toast.success(`${name}님 반갑습니다!`);
       this.facebookMutation({
         variables: {
-          email,
-          fbId: id,
           firstName: first_name,
           lastName: last_name,
+          email,
+          fbId: id,
         },
       });
     } else {
