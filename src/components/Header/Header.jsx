@@ -12,7 +12,7 @@ export default class Header extends Component {
       <header className="header-wrapper">
         <div className="header-container">
           <div className="header-logo">
-            MandalArt
+            <Link to="/">MandalArt</Link>
             <div className="header-menu">
               <Link to="/mandal-arts" className={className({ mandalPage })}>
                 나의 만다라트

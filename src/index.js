@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ApolloProvider } from 'react-apollo';
 
 import client from './apolloConfig';
-import App from './main/App';
+import App from './App';
 
 ReactModal.setAppElement('#root');
 
