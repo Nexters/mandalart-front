@@ -4,7 +4,7 @@ export const FACEBOOK_CONNECT = gql`
   mutation facebookConnect(
     $firstName: String!
     $lastName: String!
-    $email: String
+    $email: String!
     $fbId: String!
   ) {
     FacebookConnect(
