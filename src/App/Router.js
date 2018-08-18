@@ -7,7 +7,6 @@ import {
   LandingPage,
   MandalArtEditor,
   MandalArtGrave,
-  MandalArtRewardTest,
 } from '../pages';
 
 import './App.scss';
@@ -20,7 +19,6 @@ class Router extends Component {
         <Switch>
           <Route exact path="/mandal-arts" component={MandalArtList} />
           <Route path="/mandal-arts/new" component={MandalArtEditor} />
-          <Route path="/mandal-arts/reward" component={MandalArtRewardTest} />
           <Route path="/mandal-arts/graves" component={MandalArtGrave} />
         </Switch>
       </div>

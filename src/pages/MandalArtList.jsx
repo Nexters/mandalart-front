@@ -8,11 +8,9 @@ class MandalArtList extends Component {
   render() {
     return (
       <Fragment>
-        <HeaderContainer mandalPage />
+        <HeaderContainer mandalPage listPage />
         <div className="page-container">
-          <div>
-            {sessionStorage.getItem('name')}의 만다라트 목록
-          </div>
+          <div>{sessionStorage.getItem('name')}의 만다라트 목록</div>
           <MandalArtListContainer />
           <div>
             <Link to="/mandal-arts/new">

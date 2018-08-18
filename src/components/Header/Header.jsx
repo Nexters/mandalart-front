@@ -7,9 +7,9 @@ import './Header.scss';
 
 export default class Header extends Component {
   render() {
-    const { onClickLogOutBtn, mandalPage, gravePage } = this.props;
+    const { onClickLogOutBtn, mandalPage, gravePage, listPage } = this.props;
     return (
-      <header className="header-wrapper">
+      <header className={className('header-wrapper', { listPage })}>
         <div className="header-container">
           <div className="header-logo">
             <Link to="/">MandalArt</Link>
@@ -28,7 +28,9 @@ export default class Header extends Component {
           <div className="header-user">
             <img src={userPic} alt="userPic" />
             <span>User Name</span>
-            <button onClick={onClickLogOutBtn}>Logout</button>
+            <span className="logout" onClick={onClickLogOutBtn}>
+              로그아웃
+            </span>
           </div>
         </div>
       </header>
