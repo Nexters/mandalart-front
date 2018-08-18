@@ -125,6 +125,12 @@ q:after {
   content: '';
   content: none;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 table {
   border-collapse: collapse;
   border-spacing: 0;

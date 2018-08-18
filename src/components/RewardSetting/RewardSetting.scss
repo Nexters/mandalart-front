@@ -3,6 +3,8 @@
 .reward {
   width: $content-width;
   margin: 0 auto;
+  position: relative;
+  top: 30px;
   h2 {
     font-size: 30px;
     font-weight: bold;

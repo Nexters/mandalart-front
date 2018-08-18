@@ -12,7 +12,7 @@ import {
 
 import './App.scss';
 
-class App extends Component {
+class Router extends Component {
   render() {
     return (
       <div className="container">
@@ -28,4 +28,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default withRouter(Router);
