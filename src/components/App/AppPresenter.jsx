@@ -6,7 +6,6 @@ import {
   LandingPage,
   MandalArtEditor,
   MandalArtGrave,
-  MandalArtRewardTest,
 } from '../../pages';
 import { EditAccount, Settings } from '../../components';
 
@@ -31,7 +30,7 @@ const LoggedInRoutes = () => (
     <Route path={'/settings'} exact={true} component={Settings} />
     <Route exact path="/mandal-arts" component={MandalArtList} />
     <Route path="/mandal-arts/new" component={MandalArtEditor} />
-    <Route path="/mandal-arts/graves" component={MandalArtGrave} />
+    <Route path="/mandal-arts/reports" component={MandalArtGrave} />
     <Redirect from={'*'} to={'/'} />
   </Switch>
 );

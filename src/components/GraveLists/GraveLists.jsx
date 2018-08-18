@@ -85,10 +85,7 @@ export default class GraveLists extends Component {
   render() {
     return (
       <div className="grave-container">
-        <h1 className="grave-title">
-          만다라트 리포트
-          <button>모두 읽은 상태로 표시</button>
-        </h1>
+        <h1 className="grave-title">만다라트 리포트</h1>
 
         <section className="grave-lists">
           <ul className="heaven">
