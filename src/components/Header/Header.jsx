@@ -18,10 +18,10 @@ export default class Header extends Component {
                 나의 만다라트
               </Link>
               <Link
-                to="/mandal-arts/graves"
+                to="/mandal-arts/reports"
                 className={className({ gravePage })}
               >
-                만다라트 무덤
+                만다라트 리포트
               </Link>
             </div>
           </div>

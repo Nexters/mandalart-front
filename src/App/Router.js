@@ -19,7 +19,7 @@ class Router extends Component {
         <Switch>
           <Route exact path="/mandal-arts" component={MandalArtList} />
           <Route path="/mandal-arts/new" component={MandalArtEditor} />
-          <Route path="/mandal-arts/graves" component={MandalArtGrave} />
+          <Route path="/mandal-arts/reports" component={MandalArtGrave} />
         </Switch>
       </div>
     );

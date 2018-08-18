@@ -1,0 +1,66 @@
+@import '../../styles/index.scss';
+
+.list-container {
+  width: $inner-width;
+  margin: 67px auto 0 auto;
+  position: relative;
+  h2 {
+    font-size: 30px;
+    color: #d4d4d4;
+  }
+  ul {
+    margin-top: 53px;
+    display: flex;
+    li {
+      width: 210px;
+      height: 210px;
+      display: inline-block;
+      margin-right: 52px;
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+    .new-mandal {
+      background: #ffffff;
+      border: 3px dashed #1882ff;
+      .plus {
+        text-align: center;
+        color: #1882ff;
+        line-height: 210px;
+        font-size: 200px;
+        font-weight: 100;
+      }
+      .title {
+        margin: 0 auto;
+        color: #1882ff;
+        font-size: 23px;
+        position: relative;
+        top: 21px;
+      }
+    }
+    .my-mandal {
+      background: #f5f5f5;
+      p {
+        position: relative;
+      }
+      .title {
+        font-size: 23px;
+        color: #606060;
+        top: 233px;
+      }
+      .date {
+        font-size: 17px;
+        color: #d5d5d5;
+        top: 258px;
+      }
+    }
+    .sample {
+      background: #f5f5f5;
+      p {
+        color: #606060;
+        position: relative;
+        font-size: 23px;
+        top: 233px;
+      }
+    }
+  }
+}

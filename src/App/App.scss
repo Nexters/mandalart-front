@@ -110,6 +110,7 @@ section {
 }
 body {
   line-height: 1;
+  background-color: #f9f9f9;
 }
 ol,
 ul {
@@ -140,6 +141,9 @@ table {
 .background {
   background: url('../static/images/background.jpeg') no-repeat;
   height: 100vh;
+}
+
+.container {
 }
 
 .page-container {
