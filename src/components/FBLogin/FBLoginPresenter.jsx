@@ -16,7 +16,7 @@ const Link = styled.div`
   cursor: pointer;
 `;
 
-const FBLoginPresenter = (props) => (
+const FBLoginPresenter = ({loginCallback}) => (
   <Container>
     <Helmet>
       <title>FB Login | Mandalart</title>
@@ -25,7 +25,7 @@ const FBLoginPresenter = (props) => (
       appId="250416945587793"
       autoLoad={false}
       fields="name,first_name,last_name,email,picture"
-      callback={props.loginCallback}
+      callback={loginCallback}
       render={renderProps => (
         <button className="fb-button">
           <Link onClick={renderProps.onClick} className="fb-text">
