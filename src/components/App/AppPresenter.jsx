@@ -26,7 +26,7 @@ const LoggedOutRoutes = () => (
 );
 const LoggedInRoutes = () => (
   <Switch>
-    <Route path={'/'} exact={true} component={LandingPage} />
+    <Route path={'/'} exact={true} component={MandalArtList} />
     <Route path={'/edit-account'} exact={true} component={EditAccount} />
     <Route path={'/settings'} exact={true} component={Settings} />
     <Route exact path="/mandal-arts" component={MandalArtList} />
