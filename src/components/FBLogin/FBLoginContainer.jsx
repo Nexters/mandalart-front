@@ -47,7 +47,6 @@ class FBLoginContainer extends React.Component {
   }
 
   loginCallback = response => {
-    console.log('fufufufufkck', response);
     const { name, first_name, last_name, email, id, accessToken } = response;
 
     if (accessToken) {
