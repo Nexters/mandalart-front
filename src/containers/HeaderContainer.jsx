@@ -3,6 +3,7 @@ import { Redirect } from 'react-router-dom';
 import { Mutation, Query } from 'react-apollo';
 import { USER_PROFILE } from '../sharedQueries';
 import { LOG_USER_OUT } from '../sharedQueries.local';
+import { IS_LOGGED_IN } from '../components/App/AppQueries.local';
 
 import { Header } from '../components';
 

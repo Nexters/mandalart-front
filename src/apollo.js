@@ -24,6 +24,7 @@ const client = new ApolloClient({
         },
         logUserOut: (_, __, { cache }) => {
           localStorage.removeItem('jwt');
+          window.location.reload();
           cache.writeData({
             data: {
               auth: {
@@ -32,6 +33,7 @@ const client = new ApolloClient({
               },
             },
           });
+          this.props.history.replace('/');
           return null;
         },
       },

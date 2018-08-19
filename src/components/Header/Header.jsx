@@ -40,7 +40,17 @@ const Header = ({
             <div className="header-user">
               <img src={user.profileImage || userPic} alt="userPic" />
               <span>{user.fullName}</span>
-              <button onClick={logUserOut}>Logout</button>
+
+              <button
+                onClick={() => {
+                  logUserOut().then(() => {
+                    window.location.reload();
+                    this.props.history.replace('/');
+                  });
+                }}
+              >
+                Logout
+              </button>
             </div>
           </div>
         </header>
