@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Query } from 'react-apollo';
+import { Mutation, Query } from 'react-apollo';
 import { USER_PROFILE } from '../sharedQueries';
+import { LOG_USER_OUT } from '../sharedQueries.local';
 
 import { Header } from '../components';
 
@@ -16,30 +17,27 @@ export default class HeaderContainer extends Component {
     const { name, first_name, last_name, email, id, accessToken } = response;
   };
 
-  onClickLogOutBtn = () => {
-    this.setState({
-      redirectToLogin: true,
-    });
-  };
   render() {
     const { redirectToLogin } = this.state;
-    const { mandalPage, gravePage, isLoggedIn } = this.props;
-    return redirectToLogin ? (
-      <Redirect to="/" />
-    ) : (
-      <ProfileQuery query={USER_PROFILE}>
-        {({ data, loading }) => (
-          <Header
-            data={data}
-            loading={loading}
-            mandalPage={mandalPage}
-            gravePage={gravePage}
-            redirectToLogin={redirectToLogin}
-            onClickLogOutBtn={this.onClickLogOutBtn}
-            getUserProfile={this.getUserProfile}
-          />
+    const { mandalPage, gravePage } = this.props;
+    return (
+      <Mutation mutation={LOG_USER_OUT}>
+        {logUserOut => (
+          <ProfileQuery query={USER_PROFILE}>
+            {({ data, loading }) => (
+              <Header
+                data={data}
+                loading={loading}
+                mandalPage={mandalPage}
+                gravePage={gravePage}
+                redirectToLogin={redirectToLogin}
+                getUserProfile={this.getUserProfile}
+                logUserOut={logUserOut}
+              />
+            )}
+          </ProfileQuery>
         )}
-      </ProfileQuery>
+      </Mutation>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import className from 'classnames';
 import styled from '../../styled-components';
 
@@ -15,7 +15,7 @@ const Header = ({
   loading,
   mandalPage,
   gravePage,
-  onClickLogOutBtn,
+  logUserOut,
 }) => (
   <Container>
     {!loading &&
@@ -40,7 +40,7 @@ const Header = ({
             <div className="header-user">
               <img src={user.profileImage || userPic} alt="userPic" />
               <span>{user.fullName}</span>
-              <button onClick={onClickLogOutBtn}>Logout</button>
+              <button onClick={logUserOut}>Logout</button>
             </div>
           </div>
         </header>
