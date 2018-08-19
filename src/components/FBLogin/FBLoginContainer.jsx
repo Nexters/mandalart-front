@@ -51,7 +51,7 @@ class FBLoginContainer extends React.Component {
     const { name, first_name, last_name, email, id, accessToken } = response;
 
     if (accessToken) {
-      toast.success(`${name}님 반갑습니다!`);
+      toast.info(` 😎 ${name}님 반갑습니다!`);
       this.facebookMutation({
         variables: {
           firstName: first_name,
@@ -61,7 +61,7 @@ class FBLoginContainer extends React.Component {
         },
       });
     } else {
-      toast.error('로그인 실패 😔');
+      toast.error(' 😔 로그인 실패');
     }
   };
 }
