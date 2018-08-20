@@ -10,6 +10,16 @@ const Container = styled.div`
   height: 100%;
 `;
 
+const Button = styled.div`
+  color: #52a2ff;
+  padding-top: 4px;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    color: white;
+  }
+`;
+
 const Header = ({
   data: { GetMyProfile: { user = null } = {} } = {},
   loading,
@@ -41,7 +51,7 @@ const Header = ({
               <img src={user.profileImage || userPic} alt="userPic" />
               <span>{user.fullName}</span>
 
-              <button
+              <Button
                 onClick={() => {
                   logUserOut().then(() => {
                     window.location.reload();
@@ -50,7 +60,7 @@ const Header = ({
                 }}
               >
                 Logout
-              </button>
+              </Button>
             </div>
           </div>
         </header>
