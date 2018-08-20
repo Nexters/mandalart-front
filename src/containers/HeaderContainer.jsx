@@ -20,6 +20,7 @@ export default class HeaderContainer extends Component {
 
   render() {
     const { redirectToLogin } = this.state;
+
     const { mandalPage, gravePage } = this.props;
     return (
       <Mutation mutation={LOG_USER_OUT}>

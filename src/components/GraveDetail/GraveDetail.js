@@ -22,6 +22,8 @@ export default class GraveDetail extends Component {
       return (
         <ReactModal
           isOpen={true}
+          shouldCloseOnOverlayClick={true}
+          onRequestClose={onClickGraveClose}
           style={{
             overlay: {
               width: '100vw',
@@ -31,16 +33,16 @@ export default class GraveDetail extends Component {
             },
             content: {
               bottom: 'auto',
-              minHeight: '5rem',
+              minHeight: '540px',
               left: '50%',
               position: 'fixed',
               right: 'auto',
               top: '50%',
               transform: 'translate(-50%,-50%)',
-              minWidth: '30rem',
-              width: '20%',
-              padding: '2rem',
+              minWidth: '540px',
+              padding: '3rem',
               opacity: '1',
+              borderRadius: '10px',
             },
           }}
         >
@@ -58,6 +60,9 @@ export default class GraveDetail extends Component {
                 <br />
                 <div className="uncomplete" />
                 <span>미완료</span>
+                <button className="close" onClick={onClickGraveClose}>
+                  X
+                </button>
               </div>
             </div>
             <div className="middle">
@@ -72,18 +77,19 @@ export default class GraveDetail extends Component {
                 동안
               </p>
               <p>
-                <span>{title}</span>
-                만다라트를&nbsp;
-                <span>
-                  달성
-                  {status === 'FAIL' ? '실패' : '성공'}
-                </span>
+                {title}
+                &nbsp; 만다라트를&nbsp; 달성&nbsp;
+                {status === 'FAIL' ? '실패' : '성공'}
                 하여
               </p>
-              <p>만다라트가 지옥으로 떨어졌습니다.</p>
-              <button className="close" onClick={onClickGraveClose}>
-                닫기
-              </button>
+              <p>
+                만다라트가{' '}
+                <span className="result">
+                  {status === 'FAIL'
+                    ? '지옥으로 떨어졌습니다.'
+                    : '천국으로 갔습니다.'}
+                </span>
+              </p>
             </div>
           </div>
         </ReactModal>

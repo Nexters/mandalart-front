@@ -15,6 +15,15 @@ export default class GraveLists extends Component {
           onClick={onClickGrave}
         >
           <p
+            className="title"
+            data-index={i}
+            data-place="heaven"
+            onClick={onClickGrave}
+          >
+            {el.title}
+            <span>N</span>
+          </p>
+          <p
             className="date"
             data-index={i}
             data-place="heaven"
@@ -23,21 +32,12 @@ export default class GraveLists extends Component {
             {el.start_date}~{el.end_date}
           </p>
           <p
-            className="title"
-            data-index={i}
-            data-place="heaven"
-            onClick={onClickGrave}
-          >
-            {' '}
-            {el.title}
-          </p>
-          <p
             className="rate"
             data-index={i}
             data-place="heaven"
             onClick={onClickGrave}
           >
-            {el.achRate}%
+            달성률: {el.achRate}%
           </p>
         </li>
       ));
@@ -55,6 +55,15 @@ export default class GraveLists extends Component {
           onClick={onClickGrave}
         >
           <p
+            className="title"
+            data-index={i}
+            data-place="hell"
+            onClick={onClickGrave}
+          >
+            {el.title}
+            <span>N</span>
+          </p>
+          <p
             className="date"
             data-index={i}
             data-place="hell"
@@ -63,20 +72,12 @@ export default class GraveLists extends Component {
             {el.start_date}~{el.end_date}
           </p>
           <p
-            className="title"
-            data-index={i}
-            data-place="hell"
-            onClick={onClickGrave}
-          >
-            {el.title}
-          </p>
-          <p
             className="rate"
             data-index={i}
             data-place="hell"
             onClick={onClickGrave}
           >
-            {el.achRate}%
+            달성률: {el.achRate}%
           </p>
         </li>
       ));
@@ -84,10 +85,7 @@ export default class GraveLists extends Component {
   render() {
     return (
       <div className="grave-container">
-        <h1 className="grave-title">
-          만다라트 무덤
-          <button>모두 읽은 상태로 표시</button>
-        </h1>
+        <h1 className="grave-title">만다라트 리포트</h1>
 
         <section className="grave-lists">
           <ul className="heaven">

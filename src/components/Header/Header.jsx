@@ -6,6 +6,7 @@ import styled from '../../styled-components';
 import { userPic } from '../../static/images';
 import './Header.scss';
 
+
 const Container = styled.div`
   height: 100%;
 `;
