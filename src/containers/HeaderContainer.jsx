@@ -21,7 +21,7 @@ export default class HeaderContainer extends Component {
   render() {
     const { redirectToLogin } = this.state;
 
-    const { mandalPage, gravePage } = this.props;
+    const { mandalPage, gravePage, listPage } = this.props;
     return (
       <Mutation mutation={LOG_USER_OUT}>
         {logUserOut => (
@@ -32,6 +32,7 @@ export default class HeaderContainer extends Component {
                 loading={loading}
                 mandalPage={mandalPage}
                 gravePage={gravePage}
+                listPage={listPage}
                 redirectToLogin={redirectToLogin}
                 getUserProfile={this.getUserProfile}
                 logUserOut={logUserOut}
