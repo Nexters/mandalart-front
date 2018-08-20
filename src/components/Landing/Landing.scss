@@ -1,0 +1,67 @@
+img {
+  display: inline;
+}
+
+.landing-part1 {
+  background-image: url("../../static/images/Landing1.png");
+  background-position: 'center';
+  display: flex;
+  justify-content: center;  
+
+  .landing-title {
+    font-size: 5rem;
+    font-weight: 900;
+    color: white;
+    text-align: center;
+  }
+}
+
+.landing-part2 {
+  background-color: #F1F1F1;
+  background-position: 'center';
+}
+
+.landing-part3 {
+  background-color: #F1F1F1;
+  background-position: 'center';
+}
+
+.landing-part4 {
+  background-color: #F1F1F1;
+  background-position: 'center';
+}
+
+.landing-part5 {
+  background-color: #F1F1F1;
+  background-position: 'center';
+}
+
+.landing-part10 {
+  background-color: #F1F1F1;
+  background-position: 'center';
+}
+
+.landing-part11 {
+  background-color: #F1F1F1;
+  background-position: 'center';
+}
+
+.landing-part12 {
+  background-color: #F1F1F1;
+  background-position: 'center';
+}
+
+.landing-text {
+  color: #1883FF;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 50px;
+}
+
+
+.image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
