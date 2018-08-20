@@ -6,7 +6,6 @@ import styled from '../../styled-components';
 import { userPic } from '../../static/images';
 import './Header.scss';
 
-
 const Container = styled.div`
   height: 100%;
 `;
@@ -17,12 +16,13 @@ const Header = ({
   mandalPage,
   gravePage,
   logUserOut,
+  listPage,
 }) => (
   <Container>
     {!loading &&
       user &&
       user.fullName && (
-        <header className="header-wrapper">
+        <header className={className('header-wrapper', { listPage })}>
           <div className="header-container">
             <div className="header-logo">
               <Link to="/">MandalArt</Link>
@@ -31,7 +31,7 @@ const Header = ({
                   나의 만다라트
                 </Link>
                 <Link
-                  to="/mandal-arts/graves"
+                  to="/mandal-arts/reports"
                   className={className({ gravePage })}
                 >
                   만다라트 무덤
