@@ -15,10 +15,7 @@ export {
   GraveDetail,
   RewardSetting,
   MandalArtEditorHeader,
-<<<<<<< HEAD
   MandalArtEditUi,
-=======
   Settings,
   EditAccount,
->>>>>>> dba242e3f08cc2121ea219385f11afbf3a4bd947
 };
