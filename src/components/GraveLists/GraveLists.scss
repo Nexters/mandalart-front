@@ -1,0 +1,65 @@
+@import '../../styles/index.scss';
+
+.grave-container {
+  width: $inner-width;
+  margin: 1rem auto 0 auto;
+  position: relative;
+  .grave-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: $text-grey;
+    position: relative;
+    button {
+      position: absolute;
+      right: 0;
+      top: 7px;
+      border: 0;
+      background: transparent;
+    }
+  }
+  .grave-lists {
+    width: $inner-width;
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem auto 0 auto;
+    & ul {
+      display: inline-block;
+      width: 48%;
+      padding-left: 6rem;
+      & > li {
+        display: inline-block;
+        text-align: center;
+        margin: 0 1rem 1rem 0;
+        padding: 5rem 0;
+        width: 40%;
+        color: $text-grey;
+        box-shadow: 0px 0px 5px 3px $shadow-grey;
+        z-index: 10;
+        &.hellIsRead {
+          background-color: $hell-primary;
+        }
+        &.heavenIsRead {
+          background-color: $heaven-primary;
+        }
+      }
+      h2 {
+        margin: 1rem 0;
+        color: $text-grey-light;
+        display: inline-block;
+      }
+      .date {
+        font-weight: lighter;
+        margin-bottom: 1.5rem;
+      }
+      .title {
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .rate {
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}

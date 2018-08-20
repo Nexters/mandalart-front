@@ -1,13 +1,48 @@
-import ApolloClient from "apollo-boost";
+import ApolloClient from 'apollo-boost';
 
-// 그래프 ql을 쏴주는 주소
 const client = new ApolloClient({
-  // server url
-  uri: "",
-  // 로컬 스테이트 저장
   clientState: {
-    
-  }
+    defaults: {
+      auth: {
+        __typename: 'Auth',
+        isLoggedIn: Boolean(localStorage.getItem('jwt')),
+      },
+    },
+    resolvers: {
+      Mutation: {
+        logUserIn: (_, { token }, { cache }) => {
+          localStorage.setItem('jwt', token);
+          cache.writeData({
+            data: {
+              auth: {
+                __typename: 'Auth',
+                isLoggedIn: true,
+              },
+            },
+          });
+          return null;
+        },
+        logUserOut: (_, __, { cache }) => {
+          localStorage.removeItem('jwt');
+          cache.writeData({
+            data: {
+              __typename: 'Auth',
+              isLoggedIn: false,
+            },
+          });
+          return null;
+        },
+      },
+    },
+  },
+  request: async operation => {
+    operation.setContext({
+      headers: {
+        'MY-JWT': localStorage.getItem('jwt') || '',
+      },
+    });
+  },
+  uri: 'http://localhost:4000/graphql',
 });
 
 export default client;

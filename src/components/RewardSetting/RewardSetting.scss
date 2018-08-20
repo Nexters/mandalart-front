@@ -1,0 +1,129 @@
+@import '../../styles/index.scss';
+
+.reward {
+  width: $content-width;
+  margin: 0 auto;
+  position: relative;
+  top: 30px;
+  h2 {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #ffffff;
+  }
+  .box {
+    height: 188px;
+    border-radius: 10px;
+    background: #ffffff;
+    width: 100%;
+    .text-box {
+      width: 885px;
+      padding: 60px 0;
+      margin: 0 auto;
+      font-weight: bold;
+      color: #ececec;
+      .title {
+        font-size: 22px;
+        margin-bottom: 1rem;
+        &.submitted {
+          color: #1883ff;
+        }
+      }
+      .setting-reward {
+        font-size: 25px;
+        color: $text-grey;
+        span {
+          color: $text-grey-deep;
+          text-decoration: underline;
+        }
+        input {
+          border: none;
+          border-bottom: 2px solid $bg-blue;
+          font-size: 25px;
+          width: 70px;
+          &.long {
+            width: 200px;
+          }
+        }
+        button {
+          width: 104px;
+          height: 38px;
+          border-radius: 15px;
+          background-color: transparent;
+          border: 2px solid $bg-blue;
+          font-size: 20px;
+          font-weight: bold;
+          margin-left: 35px;
+        }
+      }
+    }
+  }
+  .progressive-bar {
+    margin-top: 20rem;
+    height: 25px;
+    span {
+      color: #ffffff;
+      font-size: 25px;
+      margin-right: 16px;
+      line-height: 25px;
+      font-weight: bold;
+      float: left;
+    }
+    .bar {
+      display: inline-block;
+      width: 90%;
+      border: 1px solid transparent;
+      height: 25px;
+      border-radius: 15px;
+      background-color: #0466db;
+      .purpose-wrapper {
+        position: relative;
+        left: -10px;
+        & > div {
+          position: absolute;
+          & > span {
+            position: relative;
+            bottom: 210px;
+            right: 20px;
+          }
+          & > p {
+            position: relative;
+            bottom: 175px;
+            right: 64px;
+            width: 141px;
+            height: 141px;
+            border: 2px solid #fff;
+            border-radius: 5px;
+            background: #b3d7ff;
+            padding: 1.6rem 1rem;
+            box-sizing: border-box;
+            font-size: 22px;
+            text-align: center;
+            font-weight: bold;
+            color: #0466db;
+            box-shadow: 0px 0px 15px 0px rgba(24, 131, 255, 1);
+            &::after {
+              content: '';
+              display: inline-block;
+              background: transparent;
+              position: absolute;
+              border-left: 16px solid transparent;
+              border-right: 16px solid transparent;
+              border-top: 16px solid #fff;
+              left: 53px;
+              top: 137px;
+            }
+          }
+          & > div {
+            width: 16px;
+            height: 35px;
+            background-color: #fff;
+            position: relative;
+            bottom: 147px;
+            border-radius: 5px;
+          }
+        }
+      }
+    }
+  }
+}
