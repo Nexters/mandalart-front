@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MandalArtList } from '../components';
+import MandalArtList from '../components/MandalArtList';
 
 class MandalArtListContainer extends React.Component {
   state = {
