@@ -6,7 +6,6 @@ import styled from '../../styled-components';
 import { userPic } from '../../static/images';
 import './Header.scss';
 
-
 const Container = styled.div`
   height: 100%;
 `;
@@ -31,7 +30,7 @@ const Header = ({
                   나의 만다라트
                 </Link>
                 <Link
-                  to="/mandal-arts/graves"
+                  to="/mandal-arts/reports"
                   className={className({ gravePage })}
                 >
                   만다라트 무덤
