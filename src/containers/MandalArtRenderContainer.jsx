@@ -33,9 +33,9 @@ export default class MandalArtRenderContainer extends Component {
       })),
     },
     selectedMandal: {
-      selected: false,
-      depth: 0,
-      number: 0,
+      selected: true,
+      depth: 1,
+      number: 3,
     },
     isRewardSetting: false,
   };
@@ -50,7 +50,7 @@ export default class MandalArtRenderContainer extends Component {
     });
   };
 
-  changeMandalData = ({ text, startDate, endDate, done }) => {
+  changeMandalData = ({ text, startDate, endDate }) => {
     const { depth, number } = this.state.selectedMandal;
     if (depth === 0) {
       this.setState(prevState => ({
@@ -60,19 +60,17 @@ export default class MandalArtRenderContainer extends Component {
           text,
           startDate,
           endDate,
-          done,
         },
       }));
       return;
     }
     const todo = [...this.state.mandalArtData.objective];
     if (number === 0) {
-      todo.objective[depth] = {
+      todo[depth].objective[depth] = {
         ...todo[depth],
         text,
         startDate,
         endDate,
-        done,
       };
     } else {
       todo[depth].objective[number] = {
@@ -80,7 +78,6 @@ export default class MandalArtRenderContainer extends Component {
         text,
         startDate,
         endDate,
-        done,
       };
     }
     this.setState(prevState => ({
@@ -92,8 +89,24 @@ export default class MandalArtRenderContainer extends Component {
     }));
   };
 
-  onClickRadio = () => {
-    console.log(1);
+  onClickRadio = bool => () => {
+    const { depth, number } = this.state.selectedMandal;
+    if (depth === 0) {
+      return;
+    }
+    const todo = [...this.state.mandalArtData.objective];
+    if (number === 0) {
+      todo[depth - 1].done = bool;
+    } else {
+      todo[depth - 1].objective[number - 1].done = bool;
+    }
+    this.setState(prevState => ({
+      ...prevState,
+      mandalArtData: {
+        ...prevState.mandalArtData,
+        objective: todo,
+      },
+    }));
   };
 
   onClickToRewardPage = () => {
@@ -102,7 +115,7 @@ export default class MandalArtRenderContainer extends Component {
 
   render() {
     const { onClickRadio, selectMandal } = this;
-    const { mandalArtData, isRewardSetting } = this.state;
+    const { mandalArtData, isRewardSetting, selectedMandal } = this.state;
     return (
       <Fragment>
         <MandalArtEditorHeader isRewardSetting={isRewardSetting} />
@@ -123,7 +136,14 @@ export default class MandalArtRenderContainer extends Component {
                 selectMandal={selectMandal}
               />
             </div>
-            <MandalArtEditUi done={false} onClickRadio={onClickRadio} />
+            {selectedMandal.selected && (
+              <MandalArtEditUi
+                done={false}
+                onClickRadio={onClickRadio}
+                data={mandalArtData}
+                selectedMandal={selectedMandal}
+              />
+            )}
           </div>
         )}
       </Fragment>

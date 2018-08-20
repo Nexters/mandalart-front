@@ -3,7 +3,7 @@ import './MandalArtEditUi.scss';
 
 export default class MandalArtEditUi extends Component {
   render() {
-    const { done } = this.props;
+    const { done, onClickRadio } = this.props;
     return (
       <div className="edit-ui-modal">
         <div className="edit-ui-header">달성 기간을 설정해주세요</div>
@@ -21,9 +21,10 @@ export default class MandalArtEditUi extends Component {
             name="isdone"
             type="radio"
             value="undone"
+            onChange={onClickRadio(true)}
             checked={!done}
           />
-          <label for="undone">
+          <label className={!done ? 'select' : ''} htmlFor="undone">
             <span>
               <span />
             </span>
@@ -34,9 +35,10 @@ export default class MandalArtEditUi extends Component {
             name="isdone"
             type="radio"
             value="done"
+            onChange={onClickRadio(false)}
             checked={done}
           />
-          <label for="done">
+          <label className={done ? 'select' : ''} htmlFor="done">
             <span>
               <span />
             </span>
