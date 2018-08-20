@@ -79,7 +79,9 @@ const MandalArtListsPresenter = ({
     <FlexContainer>
       {!loading && (
         <AddMandalart>
-          <PlusIcon>+</PlusIcon>
+          <Link to="mandal-arts/new">
+            <PlusIcon>+</PlusIcon>
+          </Link>
           <AddText>새로운 만다라트</AddText>
         </AddMandalart>
       )}
