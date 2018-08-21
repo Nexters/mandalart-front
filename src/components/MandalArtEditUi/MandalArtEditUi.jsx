@@ -1,18 +1,50 @@
 import React, { Component } from 'react';
 import './MandalArtEditUi.scss';
 
+const getFragmentData = (depth, num, data) => {
+  if (depth === 0) {
+    return {
+      ...data,
+    };
+  }
+  if (num === 0) {
+    return {
+      ...data.objective[depth - 1],
+    };
+  }
+  return {
+    ...data.objective[depth - 1].objective[num - 1],
+  };
+};
+
 export default class MandalArtEditUi extends Component {
   render() {
-    const { done, onClickRadio } = this.props;
+    const { changeMandalData, data, selectedMandal } = this.props;
+    const { startDate, endDate, done, text } = getFragmentData(
+      selectedMandal.depth,
+      selectedMandal.number,
+      data,
+    );
+    console.log(done);
     return (
       <div className="edit-ui-modal">
         <div className="edit-ui-header">달성 기간을 설정해주세요</div>
         <div className="edit-ui-input">
-          <input type="date" /> - <input type="date" />
+          <input
+            type="date"
+            onChange={changeMandalData('startDate')}
+            value={startDate}
+          />{' '}
+          -{' '}
+          <input
+            type="date"
+            onChange={changeMandalData('endDate')}
+            value={endDate}
+          />
         </div>
         <div className="edit-ui-header">코멘트를 적어보세요</div>
         <div className="edit-ui-input">
-          <input type="text" />
+          <input type="text" onChange={changeMandalData('text')} value={text} />
         </div>
         <form className="actions">
           목표달성여부
@@ -21,7 +53,9 @@ export default class MandalArtEditUi extends Component {
             name="isdone"
             type="radio"
             value="undone"
-            onChange={onClickRadio(true)}
+            onChange={() => {
+              changeMandalData('done')(false);
+            }}
             checked={!done}
           />
           <label className={!done ? 'select' : ''} htmlFor="undone">
@@ -35,7 +69,9 @@ export default class MandalArtEditUi extends Component {
             name="isdone"
             type="radio"
             value="done"
-            onChange={onClickRadio(false)}
+            onChange={() => {
+              changeMandalData('done')(true);
+            }}
             checked={done}
           />
           <label className={done ? 'select' : ''} htmlFor="done">
