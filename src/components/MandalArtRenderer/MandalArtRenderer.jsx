@@ -3,9 +3,15 @@ import { drawMandalArt, MandalArtFragment, utils } from './Canvas';
 
 const MIN_SIZE = 550;
 const ZOOM_LEVEL = 4;
+const FPS = 60;
 
 class MandalArtRenderer extends Component {
   mounted = false;
+
+  // for modify fps
+  frameCount = 0;
+  fpsInterval = 1000 / FPS;
+  then = window.performance.now();
 
   canvas = React.createRef();
   mandalFragArray = [...new Array(9)].map(() =>
@@ -41,6 +47,8 @@ class MandalArtRenderer extends Component {
     this.checkWidowSize();
     window.addEventListener('resize', this.checkWidowSize);
     this.mounted = true;
+    this.startTime = this.then;
+    this.now = this.then;
     this.canvasFrameEvent();
   }
 
@@ -111,14 +119,19 @@ class MandalArtRenderer extends Component {
       * 선택된  만달아트 조각이 3 * 3에 맞춰서 확대되도록...
     4. 살려줘....
   */
-  canvasFrameEvent = () => {
-    if (this.mounted) {
-      requestAnimationFrame(this.canvasFrameEvent);
+  canvasFrameEvent = newtime => {
+    if (!this.mounted) return;
+
+    requestAnimationFrame(this.canvasFrameEvent);
+
+    this.now = newtime;
+    this.elapsed = this.now - this.then;
+    if (this.elapsed > this.fpsInterval) {
+      this.then = this.now - (this.elapsed % this.fpsInterval);
       const { mandalFragArray } = this;
       const { data } = this.props;
       const { wWidth, wHeight, mouseX, mouseY } = this;
       const ctx = this.canvas.current.getContext('2d');
-
       // 전체 확대용 만다라트 로직
       ctx.clearRect(0, 0, wWidth, wHeight);
       drawMandalArt(
