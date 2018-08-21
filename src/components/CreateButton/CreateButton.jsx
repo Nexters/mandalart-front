@@ -89,12 +89,51 @@ const TextInput = styled(Input)`
   width: 300px;
 `;
 
+const DateContainer = styled.div`
+  text-align: center;
+`;
+
+const DateInput = styled.input`
+  ::-webkit-clear-button {
+    display: none;
+  }
+
+  ::-webkit-inner-spin-button {
+    display: none;
+  }
+
+  ::-webkit-calendar-picker-indicator {
+    color: #2c3e50;
+  }
+
+  appearance: none;
+  -webkit-appearance: none;
+  color: #d4d4d4;
+  font-size: 14px;
+  text-align: center;
+  width: 140px;
+  height: 50px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 20px;
+  background: #f4f4f4;
+  padding: 5px;
+  display: inline-block !important;
+  visibility: visible !important;
+
+  &:focus {
+    box-shadow: 0 0 30px #aaaaaa;
+    -webkit-box-shadow: 0 0 30px #aaaaaa;
+    -moz-box-shadow: 0 0 30px #aaaaaa;
+  }
+`;
+
 const CompleteButton = styled(Button)`
   background-color: #1882ff;
   width: 150px;
 `;
 
-const now = moment().format('YYYY/MM/DD');
 Modal.setAppElement('#root');
 
 class AddMandalartMutation extends Mutation {}
@@ -106,7 +145,7 @@ class CreateButton extends React.Component {
       modalIsOpen: false,
       name: '',
       goal: '',
-      startDate: '',
+      startDate: moment(),
       endDate: '',
     };
 
@@ -155,6 +194,22 @@ class CreateButton extends React.Component {
               value={this.state.goal}
               name={'goal'}
             />
+            <DateContainer>
+              <DateInput
+                placeholder="시작 일자"
+                type="text"
+                onChange={this.onChangeStartDate}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+              />
+              <DateInput
+                placeholder="마감 일자"
+                type="text"
+                onChange={this.onChangeEndDate}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+              />
+            </DateContainer>
 
             <Button
               disabled={this.props.loading}
@@ -174,6 +229,14 @@ class CreateButton extends React.Component {
     this.setState({
       [name]: value,
     });
+  };
+
+  onFocus = e => {
+    e.currentTarget.type = 'date';
+  };
+
+  onBlur = e => {
+    e.currentTarget.type = 'text';
   };
 
   handleCreate = async () => {
