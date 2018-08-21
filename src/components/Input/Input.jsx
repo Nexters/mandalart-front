@@ -16,12 +16,12 @@ const Container = styled.input`
     box-shadow: 0 0 0px 1000px white inset !important;
   }
   &:focus {
-    border-bottom-color: #2c3e50;
+    box-shadow: 0 0 30px #aaaaaa;
     outline: none;
   }
   &::placeholder {
     color: #d4d4d4;
-    font-weight: 300;
+    font-weight: 500;
   }
 `;
 
@@ -31,12 +31,14 @@ const Input = ({
   required = true,
   value,
   name = '',
+  onfocus,
   onChange,
   className,
 }) => (
   <Container
     className={className}
     onChange={onChange}
+    onfocus={onfocus}
     name={name}
     type={type}
     required={required}
