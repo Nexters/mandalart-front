@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from '../../styled-components';
 import Modal from 'react-modal';
+import moment from 'moment';
 
 import Input from '../../components/Input';
 import Form from '../../components/Form';
@@ -87,7 +88,8 @@ const MandalArtListsPresenter = ({
           <Mandalart key={mandalart.id}>
             <MandalartName>{mandalart.name}</MandalartName>
             <MandalartDate>
-              {mandalart.startDate} - {mandalart.endDate}
+              {moment(mandalart.startDate).format('YYYY/MM/DD')} -{' '}
+              {moment(mandalart.endDate).format('YYYY/MM/DD')}
             </MandalartDate>
           </Mandalart>
         ))}
