@@ -58,6 +58,7 @@ const CloseButton = styled.div`
 
   &:hover {
     opacity: 1;
+    cursor: pointer;
   }
   &:before,
   &:after {
@@ -76,68 +77,21 @@ const CloseButton = styled.div`
   }
 `;
 
-const TextInput = styled(Input)`
-  display: block;
-  margin-left: 80px;
-  margin-bottom: 20px;
-  align: center;
-  width: 300px;
-`;
-
-const DateContainer = styled.div`
+const AddForm = styled(Form)`
   text-align: center;
 `;
 
-const DateInput = styled(Input)`
-  display: inline-block;
-  margin-right: 10px;
-  align: center;
-  width: 140px;
+const TextInput = styled(Input)`
+  display: block;
+  margin-left: 90px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+  width: 300px;
+`;
 
-  -webkit-align-items: center;
-     display: -webkit-inline-flex;
-     font-family: monospace;
-     overflow: hidden;
-     padding: 0;
-     -webkit-padding-start: 1px;
-
-  ::-webkit-datetime-edit {
-    -webkit-flex: 1;
-    -webkit-user-modify: read-only !important;
-    display: inline-block;
-    min-width: 0;
-    overflow: hidden;
-  }
-
-  ::-webkit-datetime-edit-text {
-    color: #e5e5e5;
-    font-size: 5px
-    padding: 0 0.3em;
-  }
-  ::-webkit-datetime-edit-month-field {
-    color: #e5e5e5;
-    font-size: 5px
-  }
-  ::-webkit-datetime-edit-day-field {
-    color: #e5e5e5;
-    font-size: 5px
-  }
-  ::-webkit-datetime-edit-year-field {
-    color: #e5e5e5;
-    font-size: 5px
-  }
-  ::-webkit-inner-spin-button {
-    display: none;
-  }
-  ::-webkit-calendar-picker-indicator {
-    color: #e5e5e5;
-  }
-  ::-webkit-datetime-edit-fields-wrapper {
-    -webkit-user-modify: read-only !important;
-    display: inline-block;
-    padding: 1px 0;
-    white-space: pre;
-  }
+const CompleteButton = styled(Button)`
+  background-color: #1882ff;
+  width: 150px;
 `;
 
 const now = moment().format('YYYY/MM/DD');
@@ -152,7 +106,7 @@ class CreateButton extends React.Component {
       modalIsOpen: false,
       name: '',
       goal: '',
-      startDate: moment().format('YYYY/MM/DD'),
+      startDate: '',
       endDate: '',
     };
 
@@ -186,7 +140,7 @@ class CreateButton extends React.Component {
         >
           <ModalHeader>새 만다라트 추가</ModalHeader>
           <CloseButton onClick={this.closeModal} />
-          <Form>
+          <AddForm>
             <TextInput
               placeholder="만다라트 제목"
               type={'text'}
@@ -201,20 +155,13 @@ class CreateButton extends React.Component {
               value={this.state.goal}
               name={'goal'}
             />
-            <DatePicker
-              selected={this.state.startDate}
-              onChange={this.onInputChange}
-              minDate={moment()}
-              maxDate={moment().add(5, 'days')}
-              placeholderText="Select a date between today and 5 days in the future"
-            />
 
             <Button
               disabled={this.props.loading}
               value={this.props.loading ? '생성 중' : '만들기'}
               onClick={this.handleCreate}
             />
-          </Form>
+          </AddForm>
         </Modal>
       </React.Fragment>
     );
@@ -232,6 +179,18 @@ class CreateButton extends React.Component {
   handleCreate = async () => {
     const { name, goal, startDate, endDate } = this.state;
 
+    if (name.length < 2) {
+      toast.error('제목을 2자 이상 적어주세요!');
+      return;
+    }
+
+    if (goal.length < 3) {
+      toast.error('핵심 목표를 3자 이상 적어주세요!');
+      return;
+    }
+
+    this.closeModal();
+
     await this.props.addMandalart({
       variables: { name, goal, startDate, endDate },
       refetchQueries: [{ query: GET_MANDALARTS }],
@@ -246,7 +205,6 @@ class CreateButton extends React.Component {
         },
       ],
     });
-    this.props.history.replace('/');
   };
 }
 
