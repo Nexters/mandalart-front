@@ -27,7 +27,6 @@ class MandalArtRenderer extends Component {
   wHeight = window.innerHeight;
   zoomStatus = {
     isZoomed: false,
-    zoomLevel: 1,
     zoomCorrect: 1,
     selectedArea: {
       xCoord: 0,
@@ -154,8 +153,6 @@ class MandalArtRenderer extends Component {
       } else {
         this.lengthOffset = this.init * ZOOM_LEVEL;
       }
-    } else {
-      this.resetCanvas(ctx);
     }
   };
 
