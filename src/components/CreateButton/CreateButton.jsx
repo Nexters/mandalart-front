@@ -267,7 +267,7 @@ class CreateButton extends React.Component {
     e.currentTarget.type = 'text';
   };
 
-  handleCreate = async () => {
+  handleCreate = () => {
     const { name, goal, startDate, endDate } = this.state;
 
     if (name.length < 2) {
@@ -300,22 +300,20 @@ class CreateButton extends React.Component {
       return;
     }
 
-    this.closeModal();
-
-    await this.props.addMandalart({
-      variables: { name, goal, startDate, endDate },
-      refetchQueries: [{ query: GET_MANDALARTS }],
-      onCompleted: [
-        data => {
-          const { AddMandalart } = data;
-          if (AddMandalart.ok) {
-            toast.success('🙌 새로운 만다라트가 추가되었습니다!');
-          } else {
-            toast.error(AddMandalart.error);
-          }
-        },
-      ],
-    });
+    this.props
+      .addMandalart({
+        variables: { name, goal, startDate, endDate },
+        refetchQueries: [{ query: GET_MANDALARTS }],
+      })
+      .then(res => {
+        const { AddMandalart } = res.data;
+        if (AddMandalart.ok) {
+          toast.success('🙌 새로운 만다라트가 추가되었습니다!');
+        } else {
+          toast.error(AddMandalart.error);
+        }
+      })
+      .then(this.closeModal());
   };
 }
 
