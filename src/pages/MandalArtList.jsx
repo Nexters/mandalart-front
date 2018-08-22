@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
 import { HeaderContainer } from '../containers';
-import MandalArtListContainer from '../containers/MandalArtListContainer';
+import MandalartListsContainer from '../containers/MandalartLists/MandalartListsContainer';
 
 class MandalArtList extends Component {
   render() {
@@ -9,7 +9,7 @@ class MandalArtList extends Component {
       <Fragment>
         <HeaderContainer mandalPage listPage />
         <div className="page-container">
-          <MandalArtListContainer />
+          <MandalartListsContainer />
         </div>
       </Fragment>
     );
