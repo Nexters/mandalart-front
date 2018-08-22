@@ -10,7 +10,7 @@ import DatePicker from 'react-datepicker';
 
 import Input from '../Input';
 import Form from '../Form';
-import Button from '../Button';
+// import Button from '../Button';
 
 import { GET_MANDALARTS } from '../../sharedQueries';
 import { format } from 'url';
@@ -115,7 +115,7 @@ const DateInput = styled.input`
   width: 140px;
   height: 50px;
   margin-left: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   border: none;
   border-radius: 20px;
   background: #f4f4f4;
@@ -130,9 +130,27 @@ const DateInput = styled.input`
   }
 `;
 
-const CompleteButton = styled(Button)`
-  background-color: #1882ff;
+const CompleteButton = styled.div`
   width: 150px;
+  height: 50px;
+  background-color: #1882ff;
+  color: white;
+  text-transform: uppercase;
+  margin-left: 160px;
+  padding-top: 17px;
+  font-size: 16px;
+  border: 0;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 500;
+  text-align: center;
+  &:active,
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    opacity: 0.8;
+  }
 `;
 
 const date = new Date();
@@ -225,11 +243,7 @@ class CreateButton extends React.Component {
               />
             </DateContainer>
 
-            <Button
-              disabled={this.props.loading}
-              value={this.props.loading ? '생성 중' : '만들기'}
-              onClick={this.handleCreate}
-            />
+            <CompleteButton onClick={this.handleCreate}>만들기</CompleteButton>
           </AddForm>
         </Modal>
       </React.Fragment>
