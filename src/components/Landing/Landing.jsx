@@ -4,10 +4,10 @@ import React from 'react';
 import ReactFullpage from '@fullpage/react-fullpage';
 
 import success_block from '../../static/images/Success_Block.png';
-import success_blocks from '../../static/images/Success_Blocks.png';
+import success_blocks from '../../static/images/Success_Blocks.gif';
 import fail_block from '../../static/images/Fail_Block.png';
-import fail_block_dots from '../../static/images/Fail_Block_Dots.png';
-import introduction from '../../static/images/Introduction.png';
+import fail_block_dots from '../../static/images/Fail_Block_Dots.gif';
+import introduction from '../../static/images/Introduction.gif';
 
 import FBLogin from '../FBLogin';
 
@@ -99,25 +99,25 @@ const Landing = fullpageProps => (
             <div 
                 className="section landing-part6" 
             >
-                튜토리얼1
+                
             </div>   
 
             <div 
                 className="section landing-part7" 
             >
-                튜토리얼2
+                
             </div>   
 
             <div 
                 className="section landing-part8" 
             >
-                튜토리얼3
+                
             </div>   
 
             <div 
                 className="section landing-part9" 
             >
-                튜토리얼4
+                
             </div>   
                                              
             <div 
