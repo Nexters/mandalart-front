@@ -308,6 +308,12 @@ class CreateButton extends React.Component {
       .then(res => {
         const { AddMandalart } = res.data;
         if (AddMandalart.ok) {
+          this.setState({
+            name: '',
+            goal: '',
+            startDate: '',
+            endDate: '',
+          });
           toast.success('🙌 새로운 만다라트가 추가되었습니다!');
         } else {
           toast.error(AddMandalart.error);
