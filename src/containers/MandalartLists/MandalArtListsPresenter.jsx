@@ -88,8 +88,7 @@ const MandalArtListsPresenter = ({
           <Mandalart key={mandalart.id}>
             <MandalartName>{mandalart.name}</MandalartName>
             <MandalartDate>
-              {moment(mandalart.startDate).format('YYYY/MM/DD')} -{' '}
-              {moment(mandalart.endDate).format('YYYY/MM/DD')}
+              {mandalart.startDate} - {mandalart.endDate}
             </MandalartDate>
           </Mandalart>
         ))}

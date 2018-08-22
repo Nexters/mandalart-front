@@ -13,6 +13,7 @@ import Form from '../Form';
 import Button from '../Button';
 
 import { GET_MANDALARTS } from '../../sharedQueries';
+import { format } from 'url';
 
 const PlusIcon = styled.div`
   text-align: center;
@@ -134,6 +135,9 @@ const CompleteButton = styled(Button)`
   width: 150px;
 `;
 
+const date = new Date();
+const yesterday = date.setDate(date.getDate() - 1);
+
 Modal.setAppElement('#root');
 
 class AddMandalartMutation extends Mutation {}
@@ -145,7 +149,7 @@ class CreateButton extends React.Component {
       modalIsOpen: false,
       name: '',
       goal: '',
-      startDate: moment(),
+      startDate: '',
       endDate: '',
     };
 
@@ -163,9 +167,11 @@ class CreateButton extends React.Component {
     this.setState({ modalIsOpen: false });
   }
 
-  onChangeStartDate = date => this.setState({ startDate: date });
+  onChangeStartDate = date =>
+    this.setState({ startDate: moment(date).format('YYYY/MM/DD') });
 
-  onChangeEndDate = date => this.setState({ endDate: date });
+  onChangeEndDate = date =>
+    this.setState({ endDate: moment(date).format('YYYY/MM/DD') });
 
   render() {
     return (
@@ -198,14 +204,22 @@ class CreateButton extends React.Component {
               <DateInput
                 placeholder="시작 일자"
                 type="text"
-                onChange={this.onChangeStartDate}
+                onChange={event =>
+                  this.setState({
+                    startDate: moment(event.target.value).format('YYYY/MM/DD'),
+                  })
+                }
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
               />
               <DateInput
                 placeholder="마감 일자"
                 type="text"
-                onChange={this.onChangeEndDate}
+                onChange={event =>
+                  this.setState({
+                    endDate: moment(event.target.value).format('YYYY/MM/DD'),
+                  })
+                }
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
               />
@@ -249,6 +263,26 @@ class CreateButton extends React.Component {
 
     if (goal.length < 3) {
       toast.error('핵심 목표를 3자 이상 적어주세요!');
+      return;
+    }
+
+    if (startDate.length < 10) {
+      toast.error('시작 일자를 설정해주세요!');
+      return;
+    }
+
+    if (endDate.length < 10) {
+      toast.error('마감 일자를 설정해주세요!');
+      return;
+    }
+
+    if (new Date(startDate) < yesterday) {
+      toast.error('시작 일자는 현재보다 과거일 수 없습니다.');
+      return;
+    }
+
+    if (new Date(endDate) < new Date(startDate)) {
+      toast.error('종료 일자는 시작 일자보다 과거일 수 없습니다.');
       return;
     }
 
