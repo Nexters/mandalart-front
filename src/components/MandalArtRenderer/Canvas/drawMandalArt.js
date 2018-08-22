@@ -1,4 +1,4 @@
-import { getCurrentMandalArt } from './utils';
+import { getCurrentMandalArt, logicDivByCenter } from './utils';
 
 // 3x3랜더
 const drawMandalGroup = (
@@ -11,14 +11,23 @@ const drawMandalGroup = (
   mandalFragment,
   centerX,
   centerY,
+  depth,
 ) => {
   let startX = x - length;
   let startY = y - length;
   let drawCounter = 0;
   let drawData;
+  let number = 0;
   for (let j = 0; j < 3; j += 1) {
     for (let k = 0; k < 3; k += 1) {
       drawData = getCurrentMandalArt(data, drawCounter);
+      number = logicDivByCenter(
+        drawCounter,
+        4,
+        drawCounter + 1,
+        0,
+        drawCounter,
+      );
       mandalFragment[drawCounter].draw(
         ctx,
         startX,
@@ -28,6 +37,7 @@ const drawMandalGroup = (
         mousePos,
         centerX,
         centerY,
+        { depth, number },
       );
       startX += length;
       drawCounter += 1;
@@ -38,16 +48,27 @@ const drawMandalGroup = (
 };
 
 // 9x9 랜더
-const drawMandalArt = (ctx, x, y, length, data, mousePos, mandalFragArray) => {
+const drawMandalArt = (
+  ctx,
+  x,
+  y,
+  length,
+  data,
+  mousePos,
+  mandalFragArray,
+  ctxOff,
+) => {
   let startX = x - length * 3;
   let startY = y - length * 3;
   let drawCounter = 0;
   let drawData;
+  let depth;
   for (let j = 0; j < 3; j += 1) {
     for (let k = 0; k < 3; k += 1) {
       drawData = getCurrentMandalArt(data, drawCounter);
+      depth = logicDivByCenter(drawCounter, 4, drawCounter + 1, 0, drawCounter);
       drawMandalGroup(
-        ctx,
+        ctxOff.getContext('2d'),
         startX,
         startY,
         length,
@@ -56,6 +77,7 @@ const drawMandalArt = (ctx, x, y, length, data, mousePos, mandalFragArray) => {
         mandalFragArray[drawCounter],
         x,
         y,
+        depth,
       );
       startX += length * 3;
       drawCounter += 1;
@@ -63,6 +85,7 @@ const drawMandalArt = (ctx, x, y, length, data, mousePos, mandalFragArray) => {
     startX = x - length * 3;
     startY += length * 3;
   }
+  ctx.drawImage(ctxOff, 0, 0);
 };
 
 export default drawMandalArt;

@@ -49,7 +49,7 @@ export default class MandalArtRenderContainer extends Component {
       })),
     },
     selectedMandal: {
-      selected: true,
+      selected: false,
       depth: 1,
       number: 3,
     },

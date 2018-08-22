@@ -28,12 +28,34 @@ class MandalArtFragment {
 
   _drawText(ctx, x, y, data) {
     const { text } = data;
+    ctx.font = '16px';
     ctx.fillStyle = '#FFFFFF';
     ctx.textAlign = 'center';
     ctx.fillText(text, x, y);
   }
 
-  draw(ctx, x, y, length, data, mousePos, centerX, centerY) {
+  onClick = (mouseX, mouseY, centerX, centerY, length, onClickHandler) => {
+    if (
+      isPointInsideMandal(
+        this.x,
+        this.y,
+        length,
+        mouseX,
+        mouseY,
+        centerX,
+        centerY,
+      )
+    )
+      onClickHandler(this.depth, this.number);
+  };
+
+  draw(ctx, x, y, length, data, mousePos, centerX, centerY, dataPos) {
+    if (!this.depth) {
+      this.number = dataPos.number;
+      this.depth = dataPos.depth;
+    }
+    this.x = x;
+    this.y = y;
     const drawLength = this._setHover(
       isPointInsideMandal(
         x,

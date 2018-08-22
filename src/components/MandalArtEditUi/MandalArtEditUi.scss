@@ -43,6 +43,9 @@
   .actions {
     border-top: solid 2px #e5e5e5;
     padding: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     .select {
       color: #1882ff;
     }

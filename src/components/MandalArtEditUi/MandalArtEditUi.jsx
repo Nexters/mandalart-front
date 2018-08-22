@@ -25,7 +25,6 @@ export default class MandalArtEditUi extends Component {
       selectedMandal.number,
       data,
     );
-    console.log(done);
     return (
       <div className="edit-ui-modal">
         <div className="edit-ui-header">달성 기간을 설정해주세요</div>
@@ -47,39 +46,41 @@ export default class MandalArtEditUi extends Component {
           <input type="text" onChange={changeMandalData('text')} value={text} />
         </div>
         <form className="actions">
-          목표달성여부
-          <input
-            id="undone"
-            name="isdone"
-            type="radio"
-            value="undone"
-            onChange={() => {
-              changeMandalData('done')(false);
-            }}
-            checked={!done}
-          />
-          <label className={!done ? 'select' : ''} htmlFor="undone">
-            <span>
-              <span />
-            </span>
-            아직이요
-          </label>
-          <input
-            id="done"
-            name="isdone"
-            type="radio"
-            value="done"
-            onChange={() => {
-              changeMandalData('done')(true);
-            }}
-            checked={done}
-          />
-          <label className={done ? 'select' : ''} htmlFor="done">
-            <span>
-              <span />
-            </span>
-            달성완료!
-          </label>
+          <div>목표달성여부</div>
+          <div>
+            <input
+              id="undone"
+              name="isdone"
+              type="radio"
+              value="undone"
+              onChange={() => {
+                changeMandalData('done')(false);
+              }}
+              checked={!done}
+            />
+            <label className={!done ? 'select' : ''} htmlFor="undone">
+              <span>
+                <span />
+              </span>
+              아직이요
+            </label>
+            <input
+              id="done"
+              name="isdone"
+              type="radio"
+              value="done"
+              onChange={() => {
+                changeMandalData('done')(true);
+              }}
+              checked={done}
+            />
+            <label className={done ? 'select' : ''} htmlFor="done">
+              <span>
+                <span />
+              </span>
+              달성완료!
+            </label>
+          </div>
         </form>
       </div>
     );
