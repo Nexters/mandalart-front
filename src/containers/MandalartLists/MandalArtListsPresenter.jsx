@@ -52,6 +52,10 @@ const Mandalart = styled.div`
   display: inline-block;
   margin-right: 52px;
   margin-bottom: 120px;
+  &:hover {
+    box-shadow 0 0 30px #aaa;
+    cursor: pointer;
+  }
 `;
 
 const MandalartName = styled.div`

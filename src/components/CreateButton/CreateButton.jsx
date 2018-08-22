@@ -22,6 +22,10 @@ const PlusIcon = styled.div`
   line-height: 210px;
   font-size: 210px;
   font-weight: 300;
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
 `;
 
 const modalStyles = {
