@@ -58,6 +58,9 @@ class FBLoginContainer extends React.Component {
           email,
           fbId: id,
         },
+      }).then(() => {
+        window.location.reload();
+        this.props.history.replace('/');
       });
     } else {
       toast.error(' 😔 로그인 실패');
