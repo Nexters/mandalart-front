@@ -7,6 +7,33 @@
   height: 64px;
   background-color: $bg-blue;
   z-index: 100;
+  &.listPage {
+    background-color: #fbfbfb;
+    box-shadow: 0px 4px 40px 0px rgba(235, 235, 235, 1);
+    .header-logo {
+      color: #1882ff;
+      .header-menu {
+        a {
+          color: #949494 !important;
+          &.mandalPage {
+            color: #0d6cdf !important;
+          }
+          &.gravePage {
+            color: #0d6cdf !important;
+          }
+        }
+      }
+    }
+    .header-user {
+      span {
+        color: #666666;
+      }
+      .logout {
+        color: #52a2ff;
+      }
+    }
+  }
+
   .header-container {
     width: $inner-width;
     height: 100%;
@@ -14,9 +41,10 @@
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
+
     .header-logo {
       font-size: 1.5rem;
-      font-weight: bold;
+      font-weight: bolder;
       display: inline-block;
       color: #0d6cdf;
       .header-menu {
@@ -46,6 +74,7 @@
       width: 1.5rem;
       height: 1.5rem;
       margin-right: 1rem;
+      border-radius: 50%;
     }
     span {
       position: relative;
@@ -55,13 +84,8 @@
       font-weight: bold;
       color: #ffffff;
     }
-    button {
-      font-weight: lighter;
-      color: $text-grey;
-      background: transparent;
-      border-radius: 20px;
-      padding: 5px 10px;
-      color: $text-blue;
+    .logout {
+      color: #52a2ff;
     }
   }
 }

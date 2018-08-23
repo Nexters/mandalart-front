@@ -2,6 +2,7 @@
   z-index: 100;
   position: fixed;
   border-radius: 10px;
+  box-shadow: 1px 1px 2px #cccccc;
   background: #ffffff;
   font-size: 22px;
   color: #e5e5e5;
@@ -32,10 +33,14 @@
       font-size: 25px;
       color: #1882ff;
       background-color: transparent;
+      &.date-picker {
+        width: 200px;
+      }
       &:focus {
         outline: none;
       }
       &[type='date'] {
+        font-size: 15px;
         justify-content: center;
       }
     }
@@ -43,6 +48,9 @@
   .actions {
     border-top: solid 2px #e5e5e5;
     padding: 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     .select {
       color: #1882ff;
     }

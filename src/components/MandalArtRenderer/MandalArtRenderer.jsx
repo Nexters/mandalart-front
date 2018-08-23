@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
+import flatten from 'lodash/flatten';
 import { drawMandalArt, MandalArtFragment, utils } from './Canvas';
 
 const MIN_SIZE = 550;
 const ZOOM_LEVEL = 4;
+const FPS = 60;
 
 class MandalArtRenderer extends Component {
   mounted = false;
 
+  // for modify fps
+  frameCount = 0;
+  fpsInterval = 1000 / FPS;
+  then = window.performance.now();
+
+  // canvas
   canvas = React.createRef();
+  offScreenCvs = document.createElement('canvas');
   mandalFragArray = [...new Array(9)].map(() =>
     [...new Array(9)].map(() => new MandalArtFragment()),
   );
@@ -21,7 +30,6 @@ class MandalArtRenderer extends Component {
   wHeight = window.innerHeight;
   zoomStatus = {
     isZoomed: false,
-    zoomLevel: 1,
     zoomCorrect: 1,
     selectedArea: {
       xCoord: 0,
@@ -38,9 +46,15 @@ class MandalArtRenderer extends Component {
   }
 
   componentDidMount() {
+    // 윈도우 사이즈에 맞게 조정
     this.checkWidowSize();
+    // 윈도우 사이즈 조정되면 그에 맞게 변화
     window.addEventListener('resize', this.checkWidowSize);
     this.mounted = true;
+    // 프레임 조절을 위함
+    this.startTime = this.then;
+    this.now = this.then;
+    // 그리기 시작
     this.canvasFrameEvent();
   }
 
@@ -54,6 +68,7 @@ class MandalArtRenderer extends Component {
     const {
       zoomStatus: { selectedArea },
     } = this;
+    // 마우스 포지션을 캔버스에 맞게 조정
     const { canvasX, canvasY } = this.mapMousePos(canvas.current, e);
     const translateValue = Math.sqrt(this.init * 9 * Math.sqrt(2));
     const zoomLevel = this.zoomStatus.isZoomed ? ZOOM_LEVEL : 1;
@@ -70,6 +85,7 @@ class MandalArtRenderer extends Component {
     const { x, y, lengthOffset: length, mouseX, mouseY } = this;
     const xCoord = utils.calPointedArea(mouseX, length, x);
     const yCoord = utils.calPointedArea(mouseY, length, y);
+    // 줌 되지 않았을때는 줌을 위한 변화
     if (!this.zoomStatus.isZoomed) {
       this.zoomStatus = {
         isZoomed: true,
@@ -81,7 +97,18 @@ class MandalArtRenderer extends Component {
       const transValue = Math.floor(this.init * 9 * Math.sqrt(2));
       this.x = x - transValue * this.zoomStatus.selectedArea.xCoord;
       this.y = y - transValue * this.zoomStatus.selectedArea.yCoord;
+      return;
     }
+    flatten(this.mandalFragArray).forEach(mandal =>
+      mandal.onClick(
+        mouseX,
+        mouseY,
+        this.x,
+        this.y,
+        this.lengthOffset,
+        this.props.selectMandal,
+      ),
+    );
   };
 
   mapMousePos = (canvas, event) => {
@@ -96,6 +123,8 @@ class MandalArtRenderer extends Component {
     // 화면에 맞춰서 랜더하기 위함
     this.wWidth = window.innerWidth;
     this.wHeight = window.innerHeight;
+    this.offScreenCvs.width = this.wWidth;
+    this.offScreenCvs.height = this.wHeight;
     this.init = Math.floor(
       (this.wWidth > MIN_SIZE ? 550 : (this.wWidth * 10) / 12) / 9,
     );
@@ -111,16 +140,22 @@ class MandalArtRenderer extends Component {
       * 선택된  만달아트 조각이 3 * 3에 맞춰서 확대되도록...
     4. 살려줘....
   */
-  canvasFrameEvent = () => {
-    if (this.mounted) {
-      requestAnimationFrame(this.canvasFrameEvent);
+  canvasFrameEvent = newtime => {
+    if (!this.mounted) return;
+
+    requestAnimationFrame(this.canvasFrameEvent);
+
+    this.now = newtime;
+    this.elapsed = this.now - this.then;
+    if (this.elapsed > this.fpsInterval) {
+      this.then = this.now - (this.elapsed % this.fpsInterval);
       const { mandalFragArray } = this;
       const { data } = this.props;
       const { wWidth, wHeight, mouseX, mouseY } = this;
       const ctx = this.canvas.current.getContext('2d');
-
       // 전체 확대용 만다라트 로직
       ctx.clearRect(0, 0, wWidth, wHeight);
+      this.offScreenCvs.getContext('2d').clearRect(0, 0, wWidth, wHeight);
       drawMandalArt(
         ctx,
         this.x,
@@ -129,6 +164,8 @@ class MandalArtRenderer extends Component {
         data,
         [mouseX, mouseY],
         mandalFragArray,
+        this.offScreenCvs,
+        this.zoomStatus,
       );
       this.zoomCanvas(ctx);
     }
@@ -141,8 +178,6 @@ class MandalArtRenderer extends Component {
       } else {
         this.lengthOffset = this.init * ZOOM_LEVEL;
       }
-    } else {
-      this.resetCanvas(ctx);
     }
   };
 
