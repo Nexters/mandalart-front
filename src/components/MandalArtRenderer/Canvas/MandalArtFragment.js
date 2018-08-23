@@ -34,7 +34,11 @@ class MandalArtFragment {
     renderText(ctx, text, x - length / 2 + 20, y - length / 2 + 20, length);
   }
 
-  onClick = (mouseX, mouseY, centerX, centerY, length, onClickHandler) => {
+  off() {
+    this.selected = false;
+  }
+
+  onClick(mouseX, mouseY, centerX, centerY, length, onClickHandler) {
     if (
       isPointInsideMandal(
         this.x,
@@ -46,12 +50,12 @@ class MandalArtFragment {
         centerY,
       )
     ) {
-      onClickHandler(this.depth, this.number, this.x, this.y, length);
+      onClickHandler(this.depth, this.number);
       this.selected = true;
       return;
     }
     this.selected = false;
-  };
+  }
 
   draw(
     ctx,

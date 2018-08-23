@@ -106,6 +106,8 @@ class MandalArtRenderer extends Component {
       this.zoomStatus.isZoomed = false;
       this.x = x + transValue * this.zoomStatus.selectedArea.xCoord;
       this.y = y + transValue * this.zoomStatus.selectedArea.yCoord;
+      flatten(this.mandalFragArray).forEach(mandal => mandal.off());
+      return;
     }
     flatten(this.mandalFragArray).forEach(mandal =>
       mandal.onClick(

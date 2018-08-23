@@ -49,6 +49,10 @@ export const getTodosByMandalartId = gql`
         }
         mandalart {
           name
+          goal
+          startDate
+          endDate
+          isAchieved
         }
         subTodos {
           id

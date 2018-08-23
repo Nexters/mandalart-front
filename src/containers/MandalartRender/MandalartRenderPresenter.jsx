@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import isEqual from 'lodash/isEqual';
 import styled from '../../styled-components';
 import classNames from 'classnames';
 
@@ -43,25 +44,47 @@ const EditorHeader = styled.div`
   }
 `;
 
+const mapServerDataToState = todos => {
+  return {
+    text: todos[0].mandalArt.goal,
+    startDate: todos[0].mandalArt.startDate,
+    endDate: todos[0].mandalArt.endDate,
+    done: todos[0].mandalArt.isAchieved,
+    objective: todos.map(todo => ({
+      text: todo.title,
+      startDate: todo.startDate,
+      endDate: todo.endDate,
+      done: todo.isAchieved,
+      color: '#4198FF',
+      objective: todo.subTodos.map(subTodo => ({
+        text: subTodo.title,
+        startDate: subTodo.startDate,
+        endDate: subTodo.endDate,
+        done: subTodo.isAchieved,
+        color: '#5CA7FF',
+      })),
+    })),
+  };
+};
+
+const mapStateToServerData = mandalArtData => {};
+
 class MandalartRenderPresenter extends Component {
   state = {
     // 서버에서 오는 데이터를 이런 형태로 바꿔서 사용할거에요!
     todos: {},
     mandalArtData: {
-      id: 3,
       text: 'this is goal',
       startDate: '2018-07-02',
       endDate: '2018-07-02',
       done: false,
       objective: [...new Array(8)].map((_, index) => ({
-        id: `mainObject${index}`,
         text: `mainObject${index}`,
         startDate: '2018-07-02',
         endDate: '2018-07-02',
         color: '#4198FF',
         done: false,
         objective: [...new Array(8)].map((_, indexSub) => ({
-          id: `subObject${indexSub}`,
           text: `subObject${indexSub}`,
           startDate: '2018-07-02',
           endDate: '2018-07-02',
