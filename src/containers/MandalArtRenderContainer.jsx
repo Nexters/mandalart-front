@@ -48,6 +48,7 @@ export default class MandalArtRenderContainer extends Component {
         })),
       })),
     },
+    zoomStatus: false,
     selectedMandal: {
       selected: false,
       depth: 1,
@@ -69,13 +70,16 @@ export default class MandalArtRenderContainer extends Component {
     // upload(toServer);
   }, 100);
 
-  selectMandal = (depth, number) => {
+  selectMandal = (depth, number, xPos, yPos, length) => {
     this.setState(prevState => ({
       ...prevState,
       selectedMandal: {
         selected: true,
         depth,
         number,
+        xPos,
+        yPos,
+        length,
       },
     }));
   };

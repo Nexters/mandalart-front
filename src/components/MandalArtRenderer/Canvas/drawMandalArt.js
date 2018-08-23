@@ -12,6 +12,7 @@ const drawMandalGroup = (
   centerX,
   centerY,
   depth,
+  zoomStatus,
 ) => {
   let startX = x - length;
   let startY = y - length;
@@ -38,6 +39,7 @@ const drawMandalGroup = (
         centerX,
         centerY,
         { depth, number },
+        zoomStatus,
       );
       startX += length;
       drawCounter += 1;
@@ -57,6 +59,7 @@ const drawMandalArt = (
   mousePos,
   mandalFragArray,
   ctxOff,
+  zoomStatus,
 ) => {
   let startX = x - length * 3;
   let startY = y - length * 3;
@@ -78,6 +81,7 @@ const drawMandalArt = (
         x,
         y,
         depth,
+        zoomStatus,
       );
       startX += length * 3;
       drawCounter += 1;
