@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import className from 'classnames';
 import styled from '../../styled-components';
 
@@ -8,6 +8,16 @@ import './Header.scss';
 
 const Container = styled.div`
   height: 100%;
+`;
+
+const Button = styled.div`
+  color: #52a2ff;
+  padding-top: 4px;
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    color: white;
+  }
 `;
 
 const Header = ({
@@ -42,7 +52,7 @@ const Header = ({
               <img src={user.profileImage || userPic} alt="userPic" />
               <span>{user.fullName}</span>
 
-              <button
+              <Button
                 onClick={() => {
                   logUserOut().then(() => {
                     window.location.reload();
@@ -51,7 +61,7 @@ const Header = ({
                 }}
               >
                 Logout
-              </button>
+              </Button>
             </div>
           </div>
         </header>

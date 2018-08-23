@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import reset from 'styled-reset';
 import theme from '../../theme';
 import { ThemeProvider } from '../../styled-components';
 import AppPresenter from './AppPresenter';
