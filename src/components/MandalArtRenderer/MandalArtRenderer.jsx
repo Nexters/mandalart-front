@@ -100,7 +100,14 @@ class MandalArtRenderer extends Component {
       return;
     }
     flatten(this.mandalFragArray).forEach(mandal =>
-      mandal.onClick(mouseX, mouseY, this.x, this.y, this.lengthOffset, this.props.selectMandal),
+      mandal.onClick(
+        mouseX,
+        mouseY,
+        this.x,
+        this.y,
+        this.lengthOffset,
+        this.props.selectMandal,
+      ),
     );
   };
 
@@ -158,6 +165,7 @@ class MandalArtRenderer extends Component {
         [mouseX, mouseY],
         mandalFragArray,
         this.offScreenCvs,
+        this.zoomStatus,
       );
       this.zoomCanvas(ctx);
     }
