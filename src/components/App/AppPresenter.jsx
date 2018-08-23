@@ -29,7 +29,7 @@ const LoggedInRoutes = () => (
     <Route path={'/edit-account'} exact={true} component={EditAccount} />
     <Route path={'/settings'} exact={true} component={Settings} />
     <Route exact path="/mandal-arts" component={MandalArtList} />
-    <Route path="/mandal-arts/new" component={MandalArtEditor} />
+    <Route path="/edit/:id" component={MandalArtEditor} />
     <Route path="/mandal-arts/reports" component={MandalArtGrave} />
     <Redirect from={'*'} to={'/'} />
   </Switch>

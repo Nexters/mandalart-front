@@ -1,4 +1,9 @@
 import React, { Component, Fragment } from 'react';
+import { graphql, compose, Mutation } from 'react-apollo';
+import gql from 'graphql-tag';
+
+import { Spinner } from 'react-spinkit';
+
 import debounce from 'lodash/debounce';
 import isEqual from 'lodash/isEqual';
 import {
@@ -7,6 +12,8 @@ import {
   MandalArtEditorHeader,
   MandalArtEditUi,
 } from '../components';
+
+import { getTodosByMandalartId } from '../sharedQueries';
 
 // 이건 제가 작성할게요!
 const mapStateToServerData = state => {
@@ -21,13 +28,13 @@ const mapServerDataToState = serverData => {
   };
 };
 
-export default class MandalArtRenderContainer extends Component {
+class MandalArtRenderContainer extends Component {
   state = {
     // 서버에서 오는 데이터를 이런 형태로 바꿔서 사용할거에요!
+    todos: {},
     mandalArtData: {
       id: 3,
       text: 'this is goal',
-      color: '#73B4FF',
       startDate: '2018-07-02',
       endDate: '2018-07-02',
       done: false,
@@ -56,18 +63,18 @@ export default class MandalArtRenderContainer extends Component {
     isRewardSetting: false,
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    // 이전 만다라트 데이터랑 새로 만들어진 만다라트 데이터랑 동기화
-    if (isEqual(prevState.mandalArtData, this.state.mandalArtData)) {
-      this.uploadServer();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   // 이전 만다라트 데이터랑 새로 만들어진 만다라트 데이터랑 동기화
+  //   if (isEqual(prevState.mandalArtData, this.state.mandalArtData)) {
+  //     this.uploadServer();
+  //   }
+  // }
 
-  uploadServer = debounce(() => {
-    // upload method
-    const toServer = mapStateToServerData(this.state.mandalArtData);
-    // upload(toServer);
-  }, 100);
+  // uploadServer = debounce(() => {
+  //   // upload method
+  //   const toServer = mapStateToServerData(this.state.mandalArtData);
+  //   // upload(toServer);
+  // }, 100);
 
   selectMandal = (depth, number) => {
     this.setState(prevState => ({
@@ -119,9 +126,31 @@ export default class MandalArtRenderContainer extends Component {
     this.setState({ isRewardSetting: true });
   };
 
+  // componentDidMount() {
+  // this.props.data.refetch();
+  // const { getTodosByMandalartId } = this.props;
+
+  // if (!getTodosByMandalartId.loading) {
+  //   if (getTodosByMandalartId.GetTodosByMandalartId) {
+  //     const fetchData = getTodosByMandalartId.GetTodosByMandalartId.todos;
+  //     this.setState({ todos: fetchData });
+  //   }
+  // }
+  // }
+
   render() {
     const { selectMandal, changeMandalData } = this;
     const { mandalArtData, isRewardSetting, selectedMandal } = this.state;
+    const { getTodosByMandalartId } = this.props;
+
+    if (!getTodosByMandalartId.loading) {
+      if (getTodosByMandalartId.GetTodosByMandalartId) {
+        const fetchData = getTodosByMandalartId.GetTodosByMandalartId.todos;
+        console.log('Fetch data: ', fetchData);
+        // this.setState({ todos: fetchData });
+      }
+    }
+
     return (
       <Fragment>
         <MandalArtEditorHeader isRewardSetting={isRewardSetting} />
@@ -155,3 +184,14 @@ export default class MandalArtRenderContainer extends Component {
     );
   }
 }
+
+// export default MandalArtRenderContainer;
+
+export default graphql(getTodosByMandalartId, {
+  name: 'getTodosByMandalartId',
+  options: ({ mandalartId }) => ({
+    variables: {
+      mandalartId: mandalartId,
+    },
+  }),
+})(MandalArtRenderContainer);

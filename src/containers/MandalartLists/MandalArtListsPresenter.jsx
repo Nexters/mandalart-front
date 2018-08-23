@@ -89,12 +89,14 @@ const MandalArtListsPresenter = ({
       {!loading &&
         mandalarts.length !== 0 &&
         mandalarts.map(mandalart => (
-          <Mandalart key={mandalart.id}>
-            <MandalartName>{mandalart.name}</MandalartName>
-            <MandalartDate>
-              {mandalart.startDate} - {mandalart.endDate}
-            </MandalartDate>
-          </Mandalart>
+          <Link to={`/edit/${mandalart.id}`} key={mandalart.id}>
+            <Mandalart>
+              <MandalartName>{mandalart.name}</MandalartName>
+              <MandalartDate>
+                {mandalart.startDate} - {mandalart.endDate}
+              </MandalartDate>
+            </Mandalart>
+          </Link>
         ))}
     </FlexContainer>
   </Container>

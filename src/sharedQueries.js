@@ -30,3 +30,35 @@ export const GET_MANDALARTS = gql`
     }
   }
 `;
+
+export const getTodosByMandalartId = gql`
+  query GetTodosByMandalartId($mandalartId: Int!) {
+    GetTodosByMandalartId(mandalartId: $mandalartId) {
+      ok
+      error
+      todos {
+        id
+        title
+        startDate
+        endDate
+        comments
+        isAchieved
+        user {
+          email
+          fullName
+        }
+        mandalart {
+          name
+        }
+        subTodos {
+          id
+          title
+          startDate
+          endDate
+          comments
+          isAchieved
+        }
+      }
+    }
+  }
+`;
