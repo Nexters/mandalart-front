@@ -1,32 +1,55 @@
 import React, { Component, Fragment } from 'react';
-import { graphql, compose, Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import { Mutation } from 'react-apollo';
+import { Link } from 'react-router-dom';
+import styled from '../../styled-components';
+import classNames from 'classnames';
 
-import debounce from 'lodash/debounce';
-import isEqual from 'lodash/isEqual';
 import {
   MandalArtRenderer,
   RewardSetting,
   MandalArtEditorHeader,
   MandalArtEditUi,
-} from '../components';
+  Input,
+  Form,
+  Button,
+} from '../../components';
 
-import { getTodosByMandalartId } from '../sharedQueries';
+const EditorHeader = styled.div`
+  position: relative;
+  z-index: 10;
+  top: 64px;
+  height: 100px;
+  width: 1366px;
+  margin: 0 auto;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & > span {
+    font-size: 30px;
+    color: #fff;
+    font-weight: bold;
+    &.active {
+      opacity: 0;
+    }
+  }
+  & > div {
+    & > button {
+      font-weight: bold;
+      font-size: 21px;
+      color: #52a2ff;
+      background: #1477ec;
+      padding: 0.6rem;
+      border-radius: 15px;
+      margin-left: 10px;
+      &.active {
+        color: #fff;
+      }
+    }
+  }
+`;
 
-// 이건 제가 작성할게요!
-const mapStateToServerData = state => {
-  return {
-    //server model;
-  };
-};
-
-const mapServerDataToState = serverData => {
-  return {
-    // to state
-  };
-};
-
-class MandalArtRenderContainer extends Component {
+class MandalartRenderPresenter extends Component {
   state = {
     // 서버에서 오는 데이터를 이런 형태로 바꿔서 사용할거에요!
     todos: {},
@@ -60,19 +83,6 @@ class MandalArtRenderContainer extends Component {
     },
     isRewardSetting: false,
   };
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   // 이전 만다라트 데이터랑 새로 만들어진 만다라트 데이터랑 동기화
-  //   if (isEqual(prevState.mandalArtData, this.state.mandalArtData)) {
-  //     this.uploadServer();
-  //   }
-  // }
-
-  // uploadServer = debounce(() => {
-  //   // upload method
-  //   const toServer = mapStateToServerData(this.state.mandalArtData);
-  //   // upload(toServer);
-  // }, 100);
 
   selectMandal = (depth, number) => {
     this.setState(prevState => ({
@@ -120,39 +130,43 @@ class MandalArtRenderContainer extends Component {
     }));
   };
 
-  onClickToRewardPage = () => {
+  goToRewardPage = () => {
     this.setState({ isRewardSetting: true });
   };
 
-  // componentDidMount() {
-  // this.props.data.refetch();
-  // const { getTodosByMandalartId } = this.props;
-
-  // if (!getTodosByMandalartId.loading) {
-  //   if (getTodosByMandalartId.GetTodosByMandalartId) {
-  //     const fetchData = getTodosByMandalartId.GetTodosByMandalartId.todos;
-  //     this.setState({ todos: fetchData });
-  //   }
-  // }
-  // }
+  goToEditPage = () => {
+    this.setState({ isRewardSetting: false });
+  };
 
   render() {
-    const { selectMandal, changeMandalData } = this;
+    const {
+      data: { GetTodosByMandalartId: { todos = null } = {} } = {},
+      loading,
+    } = this.props;
     const { mandalArtData, isRewardSetting, selectedMandal } = this.state;
-    const { getTodosByMandalartId } = this.props;
-
-    if (!getTodosByMandalartId.loading) {
-      if (getTodosByMandalartId.GetTodosByMandalartId) {
-        const fetchData = getTodosByMandalartId.GetTodosByMandalartId.todos;
-        console.log('Fetch data: ', fetchData);
-        // this.setState({ todos: fetchData });
-      }
-    }
+    const { selectMandal, changeMandalData } = this;
 
     return (
       <Fragment>
-        <MandalArtEditorHeader isRewardSetting={isRewardSetting} />
-        <button onClick={this.onClickToRewardPage}>보상설정</button>
+        <EditorHeader isRewardSetting={isRewardSetting}>
+          <span className={classNames(isRewardSetting && 'active')}>
+            정연이의 취업준비
+          </span>
+          <div>
+            <button
+              onClick={this.goToEditPage}
+              className={classNames(!isRewardSetting && 'active')}
+            >
+              1.만다라트 작성
+            </button>
+            <button
+              onClick={this.goToRewardPage}
+              className={classNames(isRewardSetting && 'active')}
+            >
+              2.보상 설정
+            </button>
+          </div>
+        </EditorHeader>
         {isRewardSetting ? (
           <RewardSetting />
         ) : (
@@ -183,13 +197,4 @@ class MandalArtRenderContainer extends Component {
   }
 }
 
-export default MandalArtRenderContainer;
-
-// export default graphql(getTodosByMandalartId, {
-//   name: 'getTodosByMandalartId',
-//   options: ({ mandalartId }) => ({
-//     variables: {
-//       mandalartId: mandalartId,
-//     },
-//   }),
-// })(MandalArtRenderContainer);
+export default MandalartRenderPresenter;
