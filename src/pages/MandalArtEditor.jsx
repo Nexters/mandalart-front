@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { HeaderContainer } from '../containers';
 import { Query } from 'react-apollo';
 import { getTodosByMandalartId } from '../sharedQueries';

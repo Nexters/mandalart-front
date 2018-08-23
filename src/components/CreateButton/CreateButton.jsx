@@ -1,19 +1,15 @@
 import React from 'react';
-import { graphql, compose, Mutation } from 'react-apollo';
-import { Link, withRouter } from 'react-router-dom';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { toast } from 'react-toastify';
 import Modal from 'react-modal';
 import styled from '../../styled-components';
 import moment from 'moment';
-import DatePicker from 'react-datepicker';
 
 import Input from '../Input';
 import Form from '../Form';
-// import Button from '../Button';
 
 import { GET_MANDALARTS } from '../../sharedQueries';
-import { format } from 'url';
 
 const PlusIcon = styled.div`
   text-align: center;
@@ -161,8 +157,6 @@ const date = new Date();
 const yesterday = date.setDate(date.getDate() - 1);
 
 Modal.setAppElement('#root');
-
-class AddMandalartMutation extends Mutation {}
 
 class CreateButton extends React.Component {
   constructor() {

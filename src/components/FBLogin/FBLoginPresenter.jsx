@@ -1,6 +1,5 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';
-import { toast } from 'react-toastify';
 import styled from '../../styled-components';
 
 import './FBLoginPresenter.scss';

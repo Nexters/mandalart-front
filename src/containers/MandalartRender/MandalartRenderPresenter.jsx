@@ -1,17 +1,11 @@
 import React, { Component, Fragment } from 'react';
-import { Mutation } from 'react-apollo';
-import { Link } from 'react-router-dom';
 import styled from '../../styled-components';
 import classNames from 'classnames';
 
 import {
   MandalArtRenderer,
   RewardSetting,
-  MandalArtEditorHeader,
   MandalArtEditUi,
-  Input,
-  Form,
-  Button,
 } from '../../components';
 
 const EditorHeader = styled.div`
@@ -139,12 +133,16 @@ class MandalartRenderPresenter extends Component {
   };
 
   render() {
+    // props에서 todos 뽑아옴
     const {
       data: { GetTodosByMandalartId: { todos = null } = {} } = {},
-      loading,
     } = this.props;
+
     const { mandalArtData, isRewardSetting, selectedMandal } = this.state;
     const { selectMandal, changeMandalData } = this;
+
+    // 가져온 todos 데이터 찍어보기
+    console.log(todos);
 
     return (
       <Fragment>

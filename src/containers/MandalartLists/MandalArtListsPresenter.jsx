@@ -1,12 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from '../../styled-components';
-import Modal from 'react-modal';
-import moment from 'moment';
 
-import Input from '../../components/Input';
-import Form from '../../components/Form';
-import Button from '../../components/Button';
 import CreateButton from '../../components/CreateButton';
 
 const Container = styled.div`
