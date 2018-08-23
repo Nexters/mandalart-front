@@ -4,10 +4,10 @@ import React from 'react';
 import ReactFullpage from '@fullpage/react-fullpage';
 
 import success_block from '../../static/images/Success_Block.png';
-import success_blocks from '../../static/images/Success_Blocks.png';
+import success_blocks from '../../static/images/Success_Blocks.gif';
 import fail_block from '../../static/images/Fail_Block.png';
-import fail_block_dots from '../../static/images/Fail_Block_Dots.png';
-import introduction from '../../static/images/Introduction.png';
+import fail_block_dots from '../../static/images/Fail_Block_Dots.gif';
+import introduction from '../../static/images/Introduction.gif';
 
 import FBLogin from '../FBLogin';
 

@@ -165,6 +165,7 @@ class MandalArtRenderer extends Component {
         [mouseX, mouseY],
         mandalFragArray,
         this.offScreenCvs,
+        this.zoomStatus,
       );
       this.zoomCanvas(ctx);
     }

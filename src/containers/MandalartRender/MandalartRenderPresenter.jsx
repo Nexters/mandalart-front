@@ -70,6 +70,7 @@ class MandalartRenderPresenter extends Component {
         })),
       })),
     },
+    zoomStatus: false,
     selectedMandal: {
       selected: false,
       depth: 1,
@@ -85,6 +86,9 @@ class MandalartRenderPresenter extends Component {
         selected: true,
         depth,
         number,
+        xPos,
+        yPos,
+        length,
       },
     }));
   };
