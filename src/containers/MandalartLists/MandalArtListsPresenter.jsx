@@ -1,12 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from '../../styled-components';
-import Modal from 'react-modal';
-import moment from 'moment';
 
-import Input from '../../components/Input';
-import Form from '../../components/Form';
-import Button from '../../components/Button';
 import CreateButton from '../../components/CreateButton';
 
 const Container = styled.div`
@@ -52,6 +47,10 @@ const Mandalart = styled.div`
   display: inline-block;
   margin-right: 52px;
   margin-bottom: 120px;
+  &:hover {
+    box-shadow 0 0 30px #aaa;
+    cursor: pointer;
+  }
 `;
 
 const MandalartName = styled.div`
@@ -85,12 +84,14 @@ const MandalArtListsPresenter = ({
       {!loading &&
         mandalarts.length !== 0 &&
         mandalarts.map(mandalart => (
-          <Mandalart key={mandalart.id}>
-            <MandalartName>{mandalart.name}</MandalartName>
-            <MandalartDate>
-              {mandalart.startDate} - {mandalart.endDate}
-            </MandalartDate>
-          </Mandalart>
+          <Link to={`/edit/${mandalart.id}`} key={mandalart.id}>
+            <Mandalart>
+              <MandalartName>{mandalart.name}</MandalartName>
+              <MandalartDate>
+                {mandalart.startDate} - {mandalart.endDate}
+              </MandalartDate>
+            </Mandalart>
+          </Link>
         ))}
     </FlexContainer>
   </Container>

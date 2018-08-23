@@ -18,6 +18,17 @@ const getFragmentData = (depth, num, data) => {
 };
 
 export default class MandalArtEditUi extends Component {
+  startDate = React.createRef();
+  endDate = React.createRef();
+
+  onFocus = e => {
+    e.target.type = 'date';
+  };
+
+  onBlur = e => {
+    e.target.type = 'text';
+  };
+
   render() {
     const { changeMandalData, data, selectedMandal } = this.props;
     const { startDate, endDate, done, text } = getFragmentData(
@@ -30,14 +41,23 @@ export default class MandalArtEditUi extends Component {
         <div className="edit-ui-header">달성 기간을 설정해주세요</div>
         <div className="edit-ui-input">
           <input
-            type="date"
+            className="date-picker"
+            ref={this.startDate}
+            type="text"
             onChange={changeMandalData('startDate')}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
             value={startDate}
           />{' '}
           -{' '}
           <input
-            type="date"
+            className="date-picker"
+            ref={this.endDate}
+            type="text"
             onChange={changeMandalData('endDate')}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
+            min={startDate}
             value={endDate}
           />
         </div>

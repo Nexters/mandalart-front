@@ -1,33 +1,55 @@
 import React, { Component, Fragment } from 'react';
-import debounce from 'lodash/debounce';
-import isEqual from 'lodash/isEqual';
+import styled from '../../styled-components';
+import classNames from 'classnames';
+
 import {
   MandalArtRenderer,
   RewardSetting,
-  MandalArtEditorHeader,
   MandalArtEditUi,
-} from '../components';
+} from '../../components';
 
-// 이건 제가 작성할게요!
-const mapStateToServerData = state => {
-  return {
-    //server model;
-  };
-};
+const EditorHeader = styled.div`
+  position: relative;
+  z-index: 10;
+  top: 64px;
+  height: 100px;
+  width: 1366px;
+  margin: 0 auto;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  & > span {
+    font-size: 30px;
+    color: #fff;
+    font-weight: bold;
+    &.active {
+      opacity: 0;
+    }
+  }
+  & > div {
+    & > button {
+      font-weight: bold;
+      font-size: 21px;
+      color: #52a2ff;
+      background: #1477ec;
+      padding: 0.6rem;
+      border-radius: 15px;
+      margin-left: 10px;
+      &.active {
+        color: #fff;
+      }
+    }
+  }
+`;
 
-const mapServerDataToState = serverData => {
-  return {
-    // to state
-  };
-};
-
-export default class MandalArtRenderContainer extends Component {
+class MandalartRenderPresenter extends Component {
   state = {
     // 서버에서 오는 데이터를 이런 형태로 바꿔서 사용할거에요!
+    todos: {},
     mandalArtData: {
       id: 3,
       text: 'this is goal',
-      color: '#73B4FF',
       startDate: '2018-07-02',
       endDate: '2018-07-02',
       done: false,
@@ -48,6 +70,7 @@ export default class MandalArtRenderContainer extends Component {
         })),
       })),
     },
+    zoomStatus: false,
     selectedMandal: {
       selected: false,
       depth: 1,
@@ -55,19 +78,6 @@ export default class MandalArtRenderContainer extends Component {
     },
     isRewardSetting: false,
   };
-
-  componentDidUpdate(prevProps, prevState) {
-    // 이전 만다라트 데이터랑 새로 만들어진 만다라트 데이터랑 동기화
-    if (isEqual(prevState.mandalArtData, this.state.mandalArtData)) {
-      this.uploadServer();
-    }
-  }
-
-  uploadServer = debounce(() => {
-    // upload method
-    const toServer = mapStateToServerData(this.state.mandalArtData);
-    // upload(toServer);
-  }, 100);
 
   selectMandal = (depth, number) => {
     this.setState(prevState => ({
@@ -115,17 +125,45 @@ export default class MandalArtRenderContainer extends Component {
     }));
   };
 
-  onClickToRewardPage = () => {
+  goToRewardPage = () => {
     this.setState({ isRewardSetting: true });
   };
 
+  goToEditPage = () => {
+    this.setState({ isRewardSetting: false });
+  };
+
   render() {
-    const { selectMandal, changeMandalData } = this;
+    // props에서 todos 뽑아옴
+    const { data: { GetMandalart: { mandalart } = {} } = {} } = this.props;
+
     const { mandalArtData, isRewardSetting, selectedMandal } = this.state;
+    const { selectMandal, changeMandalData } = this;
+
+    // 가져온 todos 데이터 찍어보기
+    console.log(mandalart);
+
     return (
       <Fragment>
-        <MandalArtEditorHeader isRewardSetting={isRewardSetting} />
-        <button onClick={this.onClickToRewardPage}>보상설정</button>
+        <EditorHeader isRewardSetting={isRewardSetting}>
+          <span className={classNames(isRewardSetting && 'active')}>
+            정연이의 취업준비
+          </span>
+          <div>
+            <button
+              onClick={this.goToEditPage}
+              className={classNames(!isRewardSetting && 'active')}
+            >
+              1.만다라트 작성
+            </button>
+            <button
+              onClick={this.goToRewardPage}
+              className={classNames(isRewardSetting && 'active')}
+            >
+              2.보상 설정
+            </button>
+          </div>
+        </EditorHeader>
         {isRewardSetting ? (
           <RewardSetting />
         ) : (
@@ -155,3 +193,5 @@ export default class MandalArtRenderContainer extends Component {
     );
   }
 }
+
+export default MandalartRenderPresenter;

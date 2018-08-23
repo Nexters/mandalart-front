@@ -1,4 +1,5 @@
 import roundRect from './RoundRect';
+import renderText from './renderText';
 import { isPointInsideMandal } from './utils';
 
 const HOVER_MAX_LEVEL = 1.08;
@@ -20,18 +21,17 @@ class MandalArtFragment {
   }
 
   _drawRect(ctx, x, y, length, data) {
-    const { color } = data;
     ctx.strokeStyle = 'transparent';
-    ctx.fillStyle = color;
+    ctx.fillStyle = this.selected ? '#FFFFFF' : data.color;
     roundRect(ctx, x, y, (length * 9) / 10, (length * 9) / 10, 5);
   }
 
-  _drawText(ctx, x, y, data) {
+  _drawText(ctx, x, y, data, length) {
     const { text } = data;
-    ctx.font = '16px';
-    ctx.fillStyle = '#FFFFFF';
-    ctx.textAlign = 'center';
-    ctx.fillText(text, x, y);
+    ctx.font = '2rem Arial';
+    ctx.fillStyle = this.selected ? data.color : '#FFFFFF';
+    ctx.textAlign = 'left';
+    renderText(ctx, text, x - length / 2 + 20, y - length / 2 + 20, length);
   }
 
   onClick = (mouseX, mouseY, centerX, centerY, length, onClickHandler) => {
@@ -45,11 +45,26 @@ class MandalArtFragment {
         centerX,
         centerY,
       )
-    )
-      onClickHandler(this.depth, this.number);
+    ) {
+      onClickHandler(this.depth, this.number, this.x, this.y, length);
+      this.selected = true;
+      return;
+    }
+    this.selected = false;
   };
 
-  draw(ctx, x, y, length, data, mousePos, centerX, centerY, dataPos) {
+  draw(
+    ctx,
+    x,
+    y,
+    length,
+    data,
+    mousePos,
+    centerX,
+    centerY,
+    dataPos,
+    zoomStatus,
+  ) {
     if (!this.depth) {
       this.number = dataPos.number;
       this.depth = dataPos.depth;
@@ -69,7 +84,7 @@ class MandalArtFragment {
       length,
     );
     this._drawRect(ctx, x, y, drawLength, data);
-    this._drawText(ctx, x, y, data);
+    zoomStatus.isZoomed && this._drawText(ctx, x, y, data, length);
   }
 }
 
