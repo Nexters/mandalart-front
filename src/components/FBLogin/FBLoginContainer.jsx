@@ -1,11 +1,9 @@
 import React from 'react';
-import { Mutation, MutationFn } from 'react-apollo';
-import { RouteComponentProps } from 'react-router-dom';
+import { Mutation } from 'react-apollo';
 import { toast } from 'react-toastify';
 import { LOG_USER_IN } from '../../sharedQueries.local';
 import FBLoginPresenter from './FBLoginPresenter';
 import { FACEBOOK_CONNECT } from './FBLoginQueries';
-import styled from '../../styled-components';
 
 class FBLoginMutation extends Mutation {}
 
