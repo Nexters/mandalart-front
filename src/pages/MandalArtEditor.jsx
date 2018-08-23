@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { HeaderContainer } from '../containers';
 import { Query } from 'react-apollo';
-import { getTodosByMandalartId } from '../sharedQueries';
+import { getMandalart } from '../sharedQueries';
 import MandalArtRenderPresenter from '../containers/MandalartRender/MandalartRenderPresenter.jsx';
 
-class TodosQuery extends Query {}
+class MandalartQuery extends Query {}
 
 class MandalArtEditor extends Component {
   constructor(props) {
@@ -21,14 +21,14 @@ class MandalArtEditor extends Component {
     } = this.props;
 
     return (
-      <TodosQuery query={getTodosByMandalartId} variables={{ mandalartId: id }}>
+      <MandalartQuery query={getMandalart} variables={{ mandalartId: id }}>
         {({ data, loading }) => (
           <div className="background">
             <MandalArtRenderPresenter data={data} loading={loading} />
             <HeaderContainer mandalPage />
           </div>
         )}
-      </TodosQuery>
+      </MandalartQuery>
     );
   }
 }

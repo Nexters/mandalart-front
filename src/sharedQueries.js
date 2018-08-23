@@ -49,6 +49,7 @@ export const getTodosByMandalartId = gql`
         }
         mandalart {
           name
+          goal
         }
         subTodos {
           id
@@ -57,6 +58,43 @@ export const getTodosByMandalartId = gql`
           endDate
           comments
           isAchieved
+        }
+      }
+    }
+  }
+`;
+
+export const getMandalart = gql`
+  query GetMandalart($mandalartId: Int!) {
+    GetMandalart(mandalartId: $mandalartId) {
+      ok
+      error
+      mandalart {
+        id
+        name
+        goal
+        startDate
+        endDate
+        achievementRate
+        user {
+          fullName
+          email
+        }
+        todos {
+          id
+          title
+          isAchieved
+          startDate
+          endDate
+          comments
+          subTodos {
+            id
+            title
+            isAchieved
+            startDate
+            endDate
+            comments
+          }
         }
       }
     }

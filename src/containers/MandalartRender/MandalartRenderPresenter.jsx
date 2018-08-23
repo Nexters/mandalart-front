@@ -135,15 +135,13 @@ class MandalartRenderPresenter extends Component {
 
   render() {
     // props에서 todos 뽑아옴
-    const {
-      data: { GetTodosByMandalartId: { todos = null } = {} } = {},
-    } = this.props;
+    const { data: { GetMandalart: { mandalart } = {} } = {} } = this.props;
 
     const { mandalArtData, isRewardSetting, selectedMandal } = this.state;
     const { selectMandal, changeMandalData } = this;
 
     // 가져온 todos 데이터 찍어보기
-    console.log(todos);
+    console.log(mandalart);
 
     return (
       <Fragment>
