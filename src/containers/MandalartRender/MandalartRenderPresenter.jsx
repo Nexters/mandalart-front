@@ -86,9 +86,6 @@ class MandalartRenderPresenter extends Component {
         selected: true,
         depth,
         number,
-        xPos,
-        yPos,
-        length,
       },
     }));
   };
