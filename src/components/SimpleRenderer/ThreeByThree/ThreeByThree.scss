@@ -1,0 +1,27 @@
+.three-by-three {
+  display: flex;
+  justify-content: space-around;
+  align-items: space-around;
+  flex-wrap: wrap;
+  width: 14vw;
+  height: 14vw;
+  & > input {
+    color: #ffffff;
+    border: none;
+    border-radius: 10%;
+    background-color: #5ca7ff;
+    padding: 0.3vw;
+    width: 4vw;
+    height: 4vw;
+    font-size: 1rem;
+    &:hover {
+      padding: 0.1vw;
+      width: 4.2vw;
+      height: 4.2vw;
+      transition: all 0.3s;
+    }
+    &.center {
+      background-color: #4198ff;
+    }
+  }
+}
