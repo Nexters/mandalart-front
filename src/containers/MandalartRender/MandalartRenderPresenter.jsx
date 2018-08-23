@@ -3,7 +3,7 @@ import styled from '../../styled-components';
 import classNames from 'classnames';
 
 import {
-  MandalArtRenderer,
+  SimpleRenderer,
   RewardSetting,
   MandalArtEditUi,
 } from '../../components';
@@ -170,12 +170,13 @@ class MandalartRenderPresenter extends Component {
           <div>
             <div
               style={{
-                width: '100%',
-                height: '100%',
-                position: 'fixed',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100vh',
               }}
             >
-              <MandalArtRenderer
+              <SimpleRenderer
                 data={mandalArtData}
                 selectMandal={selectMandal}
               />

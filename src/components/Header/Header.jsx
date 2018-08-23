@@ -6,9 +6,7 @@ import styled from '../../styled-components';
 import { userPic } from '../../static/images';
 import './Header.scss';
 
-const Container = styled.div`
-  height: 100%;
-`;
+const Container = styled.div``;
 
 const Button = styled.div`
   color: #52a2ff;
