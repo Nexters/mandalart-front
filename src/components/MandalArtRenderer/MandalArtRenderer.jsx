@@ -85,6 +85,7 @@ class MandalArtRenderer extends Component {
     const { x, y, lengthOffset: length, mouseX, mouseY } = this;
     const xCoord = utils.calPointedArea(mouseX, length, x);
     const yCoord = utils.calPointedArea(mouseY, length, y);
+    const transValue = Math.floor(this.init * 9 * Math.sqrt(2));
     // 줌 되지 않았을때는 줌을 위한 변화
     if (!this.zoomStatus.isZoomed) {
       this.zoomStatus = {
@@ -94,10 +95,17 @@ class MandalArtRenderer extends Component {
           yCoord,
         },
       };
-      const transValue = Math.floor(this.init * 9 * Math.sqrt(2));
       this.x = x - transValue * this.zoomStatus.selectedArea.xCoord;
       this.y = y - transValue * this.zoomStatus.selectedArea.yCoord;
       return;
+    }
+    if (
+      xCoord !== this.zoomStatus.selectedArea.xCoord ||
+      yCoord !== this.zoomStatus.selectedArea.yCoord
+    ) {
+      this.zoomStatus.isZoomed = false;
+      this.x = x + transValue * this.zoomStatus.selectedArea.xCoord;
+      this.y = y + transValue * this.zoomStatus.selectedArea.yCoord;
     }
     flatten(this.mandalFragArray).forEach(mandal =>
       mandal.onClick(
@@ -178,6 +186,10 @@ class MandalArtRenderer extends Component {
       } else {
         this.lengthOffset = this.init * ZOOM_LEVEL;
       }
+    } else {
+      if (this.lengthOffset > this.init) {
+        this.lengthOffset -= Math.floor((this.init * ZOOM_LEVEL) / 10);
+      } else this.lengthOffset = this.init;
     }
   };
 
