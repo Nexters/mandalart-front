@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import curry from 'lodash/curry';
+import cloneDeep from 'lodash/cloneDeep';
 import styled from '../../styled-components';
 import classNames from 'classnames';
 
@@ -46,30 +48,29 @@ const EditorHeader = styled.div`
 class MandalartRenderPresenter extends Component {
   state = {
     // 서버에서 오는 데이터를 이런 형태로 바꿔서 사용할거에요!
-    todos: {},
-    mandalArtData: {
-      id: 3,
-      text: 'this is goal',
-      startDate: '2018-07-02',
-      endDate: '2018-07-02',
-      done: false,
-      objective: [...new Array(8)].map((_, index) => ({
-        id: `mainObject${index}`,
-        text: `mainObject${index}`,
-        startDate: '2018-07-02',
-        endDate: '2018-07-02',
-        color: '#4198FF',
-        done: false,
-        objective: [...new Array(8)].map((_, indexSub) => ({
-          id: `subObject${indexSub}`,
-          text: `subObject${indexSub}`,
-          startDate: '2018-07-02',
-          endDate: '2018-07-02',
-          color: '#5CA7FF',
-          done: false,
-        })),
-      })),
-    },
+    mandalArtData: null,
+    //   id: 3,
+    //   text: 'this is goal',
+    //   startDate: '2018-07-02',
+    //   endDate: '2018-07-02',
+    //   done: false,
+    //   objective: [...new Array(8)].map((_, index) => ({
+    //     id: `mainObject${index}`,
+    //     text: `mainObject${index}`,
+    //     startDate: '2018-07-02',
+    //     endDate: '2018-07-02',
+    //     color: '#4198FF',
+    //     done: false,
+    //     objective: [...new Array(8)].map((_, indexSub) => ({
+    //       id: `subObject${indexSub}`,
+    //       text: `subObject${indexSub}`,
+    //       startDate: '2018-07-02',
+    //       endDate: '2018-07-02',
+    //       color: '#5CA7FF',
+    //       done: false,
+    //     })),
+    //   })),
+    // },
     zoomStatus: false,
     selectedMandal: {
       selected: false,
@@ -79,7 +80,17 @@ class MandalartRenderPresenter extends Component {
     isRewardSetting: false,
   };
 
-  selectMandal = (depth, number) => {
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (prevState.mandalArtData === null) {
+      return {
+        ...prevState,
+        mandalArtData: nextProps.data.GetMandalart.mandalart,
+      };
+    }
+    return null;
+  }
+
+  selectMandal = curry((depth, number) => () => {
     this.setState(prevState => ({
       ...prevState,
       selectedMandal: {
@@ -88,7 +99,7 @@ class MandalartRenderPresenter extends Component {
         number,
       },
     }));
-  };
+  });
 
   changeMandalData = type => event => {
     const { depth, number } = this.state.selectedMandal;
@@ -104,15 +115,16 @@ class MandalartRenderPresenter extends Component {
       }));
       return;
     }
-    let todo = [...this.state.mandalArtData.objective];
+    let todo = cloneDeep(this.state.mandalArtData.todos);
     if (number === 0) {
       todo[depth - 1] = {
         ...todo[depth - 1],
         [type]: data,
       };
     } else {
-      todo[depth - 1].objective[number - 1] = {
-        ...todo[depth - 1].objective[number - 1],
+      console.log(todo[depth - 1].subTodos[number - 1]);
+      todo[depth - 1].subTodos[number - 1] = {
+        ...todo[depth - 1].subTodos[number - 1],
         [type]: data,
       };
     }
@@ -120,7 +132,7 @@ class MandalartRenderPresenter extends Component {
       ...prevState,
       mandalArtData: {
         ...prevState.mandalArtData,
-        objective: todo,
+        todos: todo,
       },
     }));
   };
@@ -135,62 +147,63 @@ class MandalartRenderPresenter extends Component {
 
   render() {
     // props에서 todos 뽑아옴
-    const { data: { GetMandalart: { mandalart } = {} } = {} } = this.props;
-
     const { mandalArtData, isRewardSetting, selectedMandal } = this.state;
     const { selectMandal, changeMandalData } = this;
 
     // 가져온 todos 데이터 찍어보기
-    console.log(mandalart);
+    console.log(this.props);
+    console.log('state', this.state);
 
     return (
-      <Fragment>
-        <EditorHeader isRewardSetting={isRewardSetting}>
-          <span className={classNames(isRewardSetting && 'active')}>
-            정연이의 취업준비
-          </span>
-          <div>
-            <button
-              onClick={this.goToEditPage}
-              className={classNames(!isRewardSetting && 'active')}
-            >
-              1.만다라트 작성
-            </button>
-            <button
-              onClick={this.goToRewardPage}
-              className={classNames(isRewardSetting && 'active')}
-            >
-              2.보상 설정
-            </button>
-          </div>
-        </EditorHeader>
-        {isRewardSetting ? (
-          <RewardSetting />
-        ) : (
-          <div>
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '100vh',
-              }}
-            >
-              <SimpleRenderer
-                data={mandalArtData}
-                selectMandal={selectMandal}
-              />
+      mandalArtData !== null && (
+        <Fragment>
+          <EditorHeader isRewardSetting={isRewardSetting}>
+            <span className={classNames(isRewardSetting && 'active')}>
+              정연이의 취업준비
+            </span>
+            <div>
+              <button
+                onClick={this.goToEditPage}
+                className={classNames(!isRewardSetting && 'active')}
+              >
+                1.만다라트 작성
+              </button>
+              <button
+                onClick={this.goToRewardPage}
+                className={classNames(isRewardSetting && 'active')}
+              >
+                2.보상 설정
+              </button>
             </div>
-            {selectedMandal.selected && (
-              <MandalArtEditUi
-                changeMandalData={changeMandalData}
-                data={mandalArtData}
-                selectedMandal={selectedMandal}
-              />
-            )}
-          </div>
-        )}
-      </Fragment>
+          </EditorHeader>
+          {isRewardSetting ? (
+            <RewardSetting />
+          ) : (
+            <div>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  height: '100vh',
+                }}
+              >
+                <SimpleRenderer
+                  data={mandalArtData}
+                  selectMandal={selectMandal}
+                />
+              </div>
+              {selectedMandal.selected && (
+                <MandalArtEditUi
+                  data={mandalArtData}
+                  selectedMandal={selectedMandal}
+                  changeMandalData={changeMandalData}
+                />
+              )}
+            </div>
+          )}
+        </Fragment>
+      )
     );
   }
 }

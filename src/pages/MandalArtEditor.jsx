@@ -22,12 +22,14 @@ class MandalArtEditor extends Component {
 
     return (
       <MandalartQuery query={getMandalart} variables={{ mandalartId: id }}>
-        {({ data, loading }) => (
-          <div className="background">
-            <HeaderContainer mandalPage />
-            <MandalArtRenderPresenter data={data} loading={loading} />
-          </div>
-        )}
+        {({ data, loading }) =>
+          !loading && (
+            <div className="background">
+              <HeaderContainer mandalPage />
+              <MandalArtRenderPresenter data={data} loading={loading} />
+            </div>
+          )
+        }
       </MandalartQuery>
     );
   }

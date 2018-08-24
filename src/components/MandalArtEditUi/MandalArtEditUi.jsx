@@ -9,11 +9,11 @@ const getFragmentData = (depth, num, data) => {
   }
   if (num === 0) {
     return {
-      ...data.objective[depth - 1],
+      ...data.todos[depth - 1],
     };
   }
   return {
-    ...data.objective[depth - 1].objective[num - 1],
+    ...data.todos[depth - 1].subTodos[num - 1],
   };
 };
 
@@ -30,10 +30,14 @@ export default class MandalArtEditUi extends Component {
   };
 
   render() {
-    const { changeMandalData, data, selectedMandal } = this.props;
-    const { startDate, endDate, done, text } = getFragmentData(
-      selectedMandal.depth,
-      selectedMandal.number,
+    const {
+      changeMandalData,
+      data,
+      selectedMandal: { depth, number },
+    } = this.props;
+    const { startDate, endDate, isAchieved, title, goal } = getFragmentData(
+      depth,
+      number,
       data,
     );
     return (
@@ -63,7 +67,15 @@ export default class MandalArtEditUi extends Component {
         </div>
         <div className="edit-ui-header">코멘트를 적어보세요</div>
         <div className="edit-ui-input">
-          <input type="text" onChange={changeMandalData('text')} value={text} />
+          <input
+            type="text"
+            onChange={
+              depth === 0 && number === 0
+                ? changeMandalData('goal')
+                : changeMandalData('title')
+            }
+            value={depth === 0 && number === 0 ? goal : title}
+          />
         </div>
         <form className="actions">
           <div>목표달성여부</div>
@@ -74,11 +86,11 @@ export default class MandalArtEditUi extends Component {
               type="radio"
               value="undone"
               onChange={() => {
-                changeMandalData('done')(false);
+                changeMandalData('isAchieved')(false);
               }}
-              checked={!done}
+              checked={!isAchieved}
             />
-            <label className={!done ? 'select' : ''} htmlFor="undone">
+            <label className={!isAchieved ? 'select' : ''} htmlFor="undone">
               <span>
                 <span />
               </span>
@@ -90,11 +102,11 @@ export default class MandalArtEditUi extends Component {
               type="radio"
               value="done"
               onChange={() => {
-                changeMandalData('done')(true);
+                changeMandalData('isAchieved')(true);
               }}
-              checked={done}
+              checked={isAchieved}
             />
-            <label className={done ? 'select' : ''} htmlFor="done">
+            <label className={isAchieved ? 'select' : ''} htmlFor="done">
               <span>
                 <span />
               </span>

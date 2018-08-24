@@ -3,17 +3,23 @@ import './ThreeByThree.scss';
 
 export default class ThreeByThree extends Component {
   render() {
+    const { mandalArtTodo, grade, selectMandal } = this.props;
+    const data = [...new Array(9)].map((_, index) => {
+      return mandalArtTodo[grade][index];
+    });
     return (
       <div className="three-by-three">
-        <input name="plan1" placeholder="One" />
-        <input name="plan2" placeholder="Two" />
-        <input name="plan3" placeholder="Three" />
-        <input name="plan4" placeholder="Four" />
-        <input className="center" name="goal" placeholder="목표" />
-        <input name="plan5" placeholder="Five" />
-        <input name="plan6" placeholder="Six" />
-        <input name="plan7" placeholder="Seven" />
-        <input name="plan8" placeholder="Eight" />
+        <button onClick={selectMandal(1)}>{data[0].title}</button>
+        <button onClick={selectMandal(2)}>{data[1].title}</button>
+        <button onClick={selectMandal(3)}>{data[2].title}</button>
+        <button onClick={selectMandal(4)}>{data[3].title}</button>
+        <button onClick={selectMandal(0)} className="center">
+          {grade === 'todos' ? mandalArtTodo.goal : mandalArtTodo.title}
+        </button>
+        <button onClick={selectMandal(5)}>{data[4].title}</button>
+        <button onClick={selectMandal(6)}>{data[5].title}</button>
+        <button onClick={selectMandal(7)}>{data[6].title}</button>
+        <button onClick={selectMandal(8)}>{data[7].title}</button>
       </div>
     );
   }
