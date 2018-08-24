@@ -63,13 +63,13 @@ const Landing = fullpageProps => (
             </div>
           </div>
 
-          <div className="section landing-part6">튜토리얼1</div>
+          <div className="section landing-part6"></div>
 
-          <div className="section landing-part7">튜토리얼2</div>
+          <div className="section landing-part7"></div>
 
-          <div className="section landing-part8">튜토리얼3</div>
+          <div className="section landing-part8"></div>
 
-          <div className="section landing-part9">튜토리얼4</div>
+          <div className="section landing-part9"></div>
 
           <div className="section landing-part10">
             <div className="landing-text">
