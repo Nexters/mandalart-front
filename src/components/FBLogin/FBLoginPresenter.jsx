@@ -24,7 +24,7 @@ const FBLoginPresenter = ({ loginCallback }) => (
       render={renderProps => (
         <button className="fb-button">
           <Link onClick={renderProps.onClick} className="fb-text">
-            facebook
+            시작하기
           </Link>
         </button>
       )}
